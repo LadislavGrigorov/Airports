@@ -39,45 +39,46 @@
 
                 var airports = dbContext.Airports.ToList();
                 Console.WriteLine("Airports:");
-                foreach (var item in airports)
+                foreach (var airport in airports)
                 {
-                    Console.WriteLine(item.Name);
+                    Console.WriteLine(airport.Name);
+                    Console.WriteLine(airport.City.Name);
                 }
 
                 var sofAirport = dbContext.Airports.First(a => a.AirportCode == "SOF");
                 var berAirport = dbContext.Airports.First(a => a.AirportCode == "BER");
 
-                var sofDeps = sofAirport.DepartureFlights.ToArray();
-                Console.WriteLine("SOF Deps:");
-                foreach (var item in sofDeps)
+                var sofiaDepartues = sofAirport.DepartureFlights.ToArray();
+                Console.WriteLine("SOF Departures:");
+                foreach (var flight in sofiaDepartues)
+                {
+                    Console.WriteLine("{0}: {1} -> {2}", flight.FlightCode, flight.DepartureAirport.Name, flight.ArrivalAirport.Name);
+                }
+
+                var sofiaArrivals = sofAirport.ArrivalFlights.ToArray();
+                Console.WriteLine("SOF Arrivals:");
+                foreach (var flight in sofiaArrivals)
+                {
+                    Console.WriteLine("{0}: {1} -> {2}", flight.FlightCode, flight.DepartureAirport.Name, flight.ArrivalAirport.Name);
+                }
+
+                var berlinDepartures = berAirport.DepartureFlights.ToArray();
+                Console.WriteLine("BER Departures:");
+                foreach (var flight in berlinDepartures)
+                {
+                    Console.WriteLine("{0}: {1} -> {2}", flight.FlightCode, flight.DepartureAirport.Name, flight.ArrivalAirport.Name);
+                }
+
+                var berlinArrivals = berAirport.ArrivalFlights.ToArray();
+                Console.WriteLine("BER Arrivalss:");
+                foreach (var item in berlinArrivals)
                 {
                     Console.WriteLine("{0}: {1} -> {2}", item.FlightCode, item.DepartureAirport.Name, item.ArrivalAirport.Name);
                 }
 
-                var sofArrs = sofAirport.ArrivalFlights.ToArray();
-                Console.WriteLine("SOF Arrs:");
-                foreach (var item in sofArrs)
-                {
-                    Console.WriteLine("{0}: {1} -> {2}", item.FlightCode, item.DepartureAirport.Name, item.ArrivalAirport.Name);
-                }
-
-                var berDeps = berAirport.DepartureFlights.ToArray();
-                Console.WriteLine("BER Deps:");
-                foreach (var item in berDeps)
-                {
-                    Console.WriteLine("{0}: {1} -> {2}", item.FlightCode, item.DepartureAirport.Name, item.ArrivalAirport.Name);
-                }
-
-                var berArrs = berAirport.ArrivalFlights.ToArray();
-                Console.WriteLine("BER Arrs:");
-                foreach (var item in berArrs)
-                {
-                    Console.WriteLine("{0}: {1} -> {2}", item.FlightCode, item.DepartureAirport.Name, item.ArrivalAirport.Name);
-                }
-
-                var flights = dbContext.Flights.ToList();
+                var allFlights = dbContext.Flights.ToList();
                 Console.WriteLine("Flights:");
-                foreach (var flight in flights)
+                foreach (var flight in allFlights)
                 {
                     Console.WriteLine("{0},{1}->{2} [{3}]", 
                         flight.FlightCode, 

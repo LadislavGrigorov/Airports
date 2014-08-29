@@ -18,18 +18,18 @@ namespace Airports.Data.Migrations
         {
             using (AirportsDbContext dbContext = new AirportsDbContext())
             {
-                var airportSofia = new Airport() 
-                { 
-                    Name = "Sofia Airport", 
+                var airportSofia = new Airport()
+                {
+                    Name = "Sofia Airport",
                     AirportCode = "SOF",
-                    Location = new Location() { City = "Sofia", Country = "Bulgaria" }
+                    City = new City() { Name = "Sofia", Country = new Country() { Name = "Bulgaria" } }
                 };
 
                 var berlinTegel = new Airport() 
                 { 
                     Name = "Berlin Tegel", 
-                    AirportCode = "BER", 
-                    Location = new Location() { City = "Berlin", Country = "Germany"}
+                    AirportCode = "BER",
+                    City = new City() { Name = "Berlin", Country = new Country() { Name = "Germany" } }
                 };
 
                 var berSof = new Flight()
