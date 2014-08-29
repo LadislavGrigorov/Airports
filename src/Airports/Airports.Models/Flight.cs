@@ -36,6 +36,7 @@ namespace Airports.Models
         [ForeignKey("Airline")]
         public int AirlineId { get; set; }
 
+        [InverseProperty("Flights")]
         public virtual Airline Airline { get; set; }
     }
 }

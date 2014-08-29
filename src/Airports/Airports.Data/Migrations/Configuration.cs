@@ -52,16 +52,6 @@ namespace Airports.Data.Migrations
                     FlightCode = "AAA42"
                 };
 
-                berlinTegel.DepartureFlights.Add(berSof);
-                airportSofia.ArrivalFlights.Add(berSof);
-                
-                airportSofia.DepartureFlights.Add(sofBer);
-                berlinTegel.ArrivalFlights.Add(sofBer);
-
-                dbContext.Airports.AddOrUpdate(a => a.AirportCode, airportSofia, berlinTegel);
-
-                dbContext.SaveChanges();
-
                 dbContext.Flights.AddOrUpdate(f => f.FlightCode, sofBer, berSof);
 
                 dbContext.SaveChanges();

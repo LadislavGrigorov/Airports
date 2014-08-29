@@ -6,6 +6,7 @@ namespace Airports.Models
     [ComplexType]
     public class Location
     {
+        [Column()]
         public string City { get; set; }
 
         public string Country { get; set; }

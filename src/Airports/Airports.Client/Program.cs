@@ -29,6 +29,12 @@
                 foreach (var item in airlines)
                 {
                     Console.WriteLine(item.Name);
+                    var airlineFlights = item.Flights.ToList();
+
+                    foreach (var flight in airlineFlights)
+                    {
+                        Console.WriteLine(flight.FlightCode);
+                    }
                 }
 
                 var airports = dbContext.Airports.ToList();
