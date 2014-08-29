@@ -22,6 +22,7 @@ namespace Airports.Models
         [Index(IsUnique = true)]
         public string Name { get; set; }
 
+        [InverseProperty("Airline")]
         public virtual ICollection<Flight> Flights
         {
             get { return this.flights; }

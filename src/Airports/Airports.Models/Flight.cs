@@ -10,17 +10,17 @@ namespace Airports.Models
         [Key]
         public int FlightId { get; set; }
 
+        [Required]
         [ForeignKey("DepartureAirport")]
         public int DepartureAirportId { get; set; }
 
-        [InverseProperty("DepartureFlights")]
-        public Airport DepartureAirport { get; set; }
+        public virtual Airport DepartureAirport { get; set; }
 
+        [Required]
         [ForeignKey("ArrivalAirport")]
         public int ArrivalAirportId { get; set; }
 
-        [InverseProperty("ArrivalFlights")]
-        public Airport ArrivalAirport { get; set; }
+        public virtual Airport ArrivalAirport { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -34,9 +34,8 @@ namespace Airports.Models
         public double DurationHours { get; set; }
 
         [ForeignKey("Airline")]
-        public int AirlineId { get; set; }
+        public int? AirlineId { get; set; }
 
-        [InverseProperty("Flights")]
         public virtual Airline Airline { get; set; }
     }
 }

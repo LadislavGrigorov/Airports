@@ -53,7 +53,6 @@
     <Compile Include="City.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Flight.cs" />
-    <Compile Include="Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

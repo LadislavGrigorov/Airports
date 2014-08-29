@@ -29,12 +29,14 @@
         [Index(IsUnique = true)]
         public string AirportCode { get; set; }
 
+        [InverseProperty("ArrivalAirport")]
         public virtual ICollection<Flight> ArrivalFlights
         {
             get { return this.arrivalFlights; }
             set { this.arrivalFlights = value; }
         }
 
+        [InverseProperty("DepartureAirport")]
         public virtual ICollection<Flight> DepartureFlights
         {
             get { return this.departureFlights; }
