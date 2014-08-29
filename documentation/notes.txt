@@ -1,0 +1,27 @@
+NOTES:
+	* cascade delete(fixed using fluent EF6.1 API)
+	* Location is used as Complex type i.e. its properties as used as columns but not the class itself
+	
+Airport
+	-Id
+	-Name
+	-Flights
+	-CityId
+	
+Flight
+	-Id
+	-DepartureAirport(AirportId)
+	-ArrivalAirport(AirportId)
+	-FlightDateTime
+	-DurationHours(km)
+	-AirlineId
+	
+Airline
+	-Id
+	-Name
+
+Location
+	-AddressText
+	-City
+	-Country
+	
