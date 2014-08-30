@@ -12,7 +12,7 @@
     class Program
     {
         private const string SampleFlightsArchivedFilePath = @"..\..\..\..\Imports\Sample-Flights.zip";
-        private const string SampleFlightsUnpackedFilePath = @"..\..\..\..\Imports\Sample-Flights-Extracted";
+        private const string SampleFlightsUnpackedDestinationPath = @"..\..\..\..\Imports\Sample-Flights-Extracted\";
 
         static void Main()
         {
@@ -22,8 +22,9 @@
              * a) Extract *.xls and *.xlsx files from a zip archive; read and load the data into SQL Server.
              * b) Import data MongoDb into SQL Server. */
             var zipExtractor = new ZipExtractor();
-            zipExtractor.Extract(SampleFlightsArchivedFilePath, SampleFlightsUnpackedFilePath);
+            zipExtractor.Extract(SampleFlightsArchivedFilePath, SampleFlightsUnpackedDestinationPath);
+            var excelDataImporter = new ExcelDataImporter();
+            excelDataImporter.ImportFlightsDataFromDirectory(SampleFlightsUnpackedDestinationPath);
         }
-
     }
 }
