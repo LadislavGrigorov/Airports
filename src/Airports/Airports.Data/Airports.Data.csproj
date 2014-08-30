@@ -55,10 +55,7 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ConnectionStrings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="IAirportsData.cs" />
-    <Compile Include="IAirportsDbContext.cs" />
-    <Compile Include="Importers\ExcelDataImporter.cs" />
+    </Compile>    <Compile Include="Importers\ExcelDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
     <Compile Include="Loaders\SqlServerDataLoader.cs" />
     <Compile Include="Migrations\Configuration.cs" />

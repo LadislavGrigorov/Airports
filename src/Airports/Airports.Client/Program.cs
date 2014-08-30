@@ -39,9 +39,9 @@
                 }
 
                 Console.WriteLine("Done.");
-            }
-
-            //throws Exception using the new API(AirportsData), not ready for using yet
+            }			// Task 4: a) Genetare JSON reports from SQL Server to file system.
+            JsonFileExporter.GenerateReports();
+			//throws Exception using the new API(AirportsData), not ready for using yet
             //DbContentTester.PrintCountriesAndTheirCities();
             //DbContentTester.PrintAllFlightsData();
         }
