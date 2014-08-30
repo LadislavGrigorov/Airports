@@ -55,6 +55,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ConnectionStrings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Exporters\JsonFileExporter.cs" />
     <Compile Include="Importers\ExcelDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
     <Compile Include="Loaders\SqlServerDataLoader.cs" />

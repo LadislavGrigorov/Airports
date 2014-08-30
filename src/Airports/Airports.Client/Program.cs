@@ -42,6 +42,9 @@
 
                 Console.WriteLine("Done.");
             }
+
+            // Task 4: a) Genetare JSON reports from SQL Server to file system.
+            JsonFileExporter.GenerateReports();
         }
     }
 }
