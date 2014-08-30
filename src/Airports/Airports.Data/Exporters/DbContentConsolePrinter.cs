@@ -13,11 +13,11 @@
 
         public static void PrintCountries()
         {
-            using (AirportsDbContext dbContext = new AirportsDbContext())
+            using (AirportsDbContext context = new AirportsDbContext())
             {
                 Console.WriteLine(DecorationLine);
 
-                var countries = dbContext.Countries.ToArray();
+                var countries = context.Countries.ToArray();
                 Console.WriteLine("Countries:");
 
                 foreach (var country in countries)
@@ -30,10 +30,10 @@
 
         public static void PrintCities()
         {
-            using (AirportsDbContext dbContext = new AirportsDbContext())
+            using (AirportsDbContext context = new AirportsDbContext())
             {
                 Console.WriteLine(DecorationLine);
-                var cities = dbContext.Cities.ToArray();
+                var cities = context.Cities.ToArray();
                 Console.WriteLine("Cities:");
 
                 foreach (var city in cities)
@@ -46,10 +46,10 @@
 
         public static void PrintDbContent()
         {
-            using (AirportsDbContext dbContext = new AirportsDbContext())
+            using (AirportsDbContext context = new AirportsDbContext())
             {
                 Console.WriteLine(DecorationLine);
-                var airlines = dbContext.Airlines.ToList();
+                var airlines = context.Airlines.ToList();
                 Console.WriteLine("Airlines:");
 
                 foreach (var airline in airlines)
@@ -64,7 +64,7 @@
                     }
                 }
 
-                var airports = dbContext.Airports.ToList();
+                var airports = context.Airports.ToList();
                 Console.WriteLine("Airports:");
 
                 foreach (var airport in airports)

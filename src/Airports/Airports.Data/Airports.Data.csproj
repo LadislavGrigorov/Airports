@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Importers\ExcelDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
+    <Compile Include="Loaders\SqlServerDataLoader.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exporters\DbContentConsolePrinter.cs" />
