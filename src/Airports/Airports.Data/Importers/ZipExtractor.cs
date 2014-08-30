@@ -1,10 +1,10 @@
-﻿namespace Airports.Data.Loaders
+﻿namespace Airports.Data.Importers
 {
     using Ionic.Zip;
 
     public class ZipExtractor
     {
-        public void ExtractZip(string filePath, string destinationPath)
+        public void Extract(string filePath, string destinationPath)
         {
             using (ZipFile zip = ZipFile.Read(filePath))
             {

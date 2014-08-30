@@ -39,15 +39,21 @@ namespace Airports.Data.Migrations
                 var airportSofia = new Airport() { AirportId = 1, AirportCode = "SOF", CityId = 1, Name = "Sofia Airport" };
                 var airportParis = new Airport() { AirportId = 2, AirportCode = "CDG", CityId = 2, Name = "Charles de Gaulle Airport" };
                 var airportBerlin = new Airport() { AirportId = 3, AirportCode = "TXL", CityId = 3, Name = "Berlin Tegel" };
+                var airportBarcelona = new Airport() { AirportId = 4, AirportCode = "BCN", CityId = 4, Name="Barcelona El-Prat Airport"};
+                var airportLondon = new Airport() { AirportId = 5, AirportCode = "LHR", CityId = 5, Name = "London Heathrow" };
 
-                dbContext.Airports.AddOrUpdate(a => a.AirportCode, airportSofia, airportParis, airportBerlin);
+                dbContext.Airports.AddOrUpdate(a => a.AirportCode, 
+                    airportSofia, airportParis, airportBerlin, airportBarcelona, airportLondon);
                 dbContext.SaveChanges();
 
                 var airlineBulgariaAir = new Airline() { AirlineId = 1, Name = "Bulgaria Air" };
-                var airlineLufhansa = new Airline() { AirlineId = 3, Name = "Lufthansa" };
                 var airlineAirFrance = new Airline() { AirlineId = 2, Name = "Air France" };
+                var airlineLufhansa = new Airline() { AirlineId = 3, Name = "Lufthansa" };
+                var airlineIberia = new Airline() { AirlineId = 4, Name = "Iberia" };
+                var airlineBritishAirways = new Airline() { AirlineId = 5, Name = "British Airways" };
 
-                dbContext.Airlines.AddOrUpdate(a => a.Name, airlineBulgariaAir, airlineLufhansa, airlineAirFrance);
+                dbContext.Airlines.AddOrUpdate(a => a.Name, 
+                    airlineBulgariaAir, airlineLufhansa, airlineAirFrance, airlineIberia, airlineBritishAirways);
                 dbContext.SaveChanges();
 
                 var flightSofiaParis = new Flight()

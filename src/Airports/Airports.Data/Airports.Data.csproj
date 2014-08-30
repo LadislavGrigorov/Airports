@@ -55,6 +55,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ConnectionStrings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Loaders\ExcelDataLoader.cs" />
     <Compile Include="Loaders\ZipExtractor.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
