@@ -55,7 +55,9 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ConnectionStrings.settings</DependentUpon>
-    </Compile>    <Compile Include="Importers\ExcelDataImporter.cs" />
+    </Compile>
+    <Compile Include="Exporters\JsonFileExporter.cs" />
+    <Compile Include="Importers\ExcelDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
     <Compile Include="Loaders\SqlServerDataLoader.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="Repositories\AirlinesRepository.cs" />
     <Compile Include="Repositories\AirportsRepository.cs" />
     <Compile Include="Repositories\FlightsRepository.cs" />
+    <Compile Include="Repositories\IAirportsData.cs" />
+    <Compile Include="Repositories\IAirportsDbContext.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>

@@ -1,8 +1,9 @@
 ﻿namespace Airports.Data
 {
+    using Airports.Data.Repositories;
     using Airports.Models;
     using System.Data.Entity;
-
+    
     public class AirportsDbContext : DbContext, IAirportsDbContext 
     {
         public AirportsDbContext()
