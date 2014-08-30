@@ -1,4 +1,4 @@
-﻿namespace Airports.Client
+﻿namespace Airports.Data.Reporters
 {
     using Airports.Data;
     using System;

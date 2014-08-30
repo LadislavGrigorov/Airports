@@ -4,6 +4,7 @@
     using System.Linq;
     using Airports.Data;
     using Airports.Data.Migrations;
+    using Airports.Data.Reporters;
     using Airports.Models;
     using System.Data.Entity;
 
@@ -11,7 +12,6 @@
     {
         static void Main()
         {
-            //Delete or comment after db initialization
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AirportsDbContext, Configuration>());
 
             DbContentConsolePrinter.PrintCountries();
