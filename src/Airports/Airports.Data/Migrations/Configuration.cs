@@ -92,7 +92,6 @@ namespace Airports.Data.Migrations
             };
 
             context.Flights.AddOrUpdate(f => f.FlightCode, flightBerlinSofia);
-            context.SaveChanges();
         }
     }
 }

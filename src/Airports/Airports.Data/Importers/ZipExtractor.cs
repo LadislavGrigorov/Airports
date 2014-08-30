@@ -4,9 +4,9 @@
 
     public class ZipExtractor
     {
-        public void Extract(string filePath, string destinationPath)
+        public void Extract(string sourcePath, string destinationPath)
         {
-            using (ZipFile zip = ZipFile.Read(filePath))
+            using (ZipFile zip = ZipFile.Read(sourcePath))
             {
                 foreach (ZipEntry entry in zip)
                 {
