@@ -49,18 +49,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirportsData.cs" />
     <Compile Include="AirportsDbContext.cs" />
     <Compile Include="ConnectionStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ConnectionStrings.settings</DependentUpon>
     </Compile>
+    <Compile Include="IAirportsData.cs" />
+    <Compile Include="IAirportsDbContext.cs" />
     <Compile Include="Importers\ExcelDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
     <Compile Include="Loaders\SqlServerDataLoader.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Exporters\DbContentConsolePrinter.cs" />
+    <Compile Include="Exporters\DbContentTester.cs" />
+    <Compile Include="Repositories\AirlinesRepository.cs" />
+    <Compile Include="Repositories\AirportsRepository.cs" />
+    <Compile Include="Repositories\FlightsRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

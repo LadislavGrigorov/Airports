@@ -7,7 +7,7 @@
     {
         public void LoadFlight(Flight flight, AirportsDbContext context)
         {
-            //TODO: Add data validation
+            //TODO: Add data validation!
             context.Flights.AddOrUpdate(f => f.FlightCode, flight);
             context.SaveChanges();
         }

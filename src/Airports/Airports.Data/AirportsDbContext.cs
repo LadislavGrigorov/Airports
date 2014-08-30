@@ -3,7 +3,7 @@
     using Airports.Models;
     using System.Data.Entity;
 
-    public class AirportsDbContext : DbContext
+    public class AirportsDbContext : DbContext, IAirportsDbContext 
     {
         public AirportsDbContext()
             : base("AirportsDb")
@@ -35,6 +35,17 @@
                         .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+
+        public IDbSet<T> GetDataSet<T>() where T : class
+        {
+            return base.Set<T>();
+        }
+
+        public new void SaveChanges()
+        {
+            base.SaveChanges();
         }
     }
 }

@@ -1,14 +1,12 @@
 ﻿namespace Airports.Client
 {
-    using System;
-    using System.Linq;
     using Airports.Data;
-    using Airports.Data.Migrations;
     using Airports.Data.Exporters;
-    using Airports.Models;
-    using System.Data.Entity;
     using Airports.Data.Importers;
     using Airports.Data.Loaders;
+    using Airports.Data.Migrations;
+    using System;
+    using System.Data.Entity;
 
     class Program
     {
@@ -42,6 +40,10 @@
 
                 Console.WriteLine("Done.");
             }
+
+            //throws Exception using the new API(AirportsData), not ready for using yet
+            //DbContentTester.PrintCountriesAndTheirCities();
+            //DbContentTester.PrintAllFlightsData();
         }
     }
 }
