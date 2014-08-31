@@ -33,6 +33,11 @@
             }
 
             Console.WriteLine("Done.");
+
+            //Task 2: Generate PDF Reports
+            Console.WriteLine("Exporting PDF flights report....");
+            PdfFileExporter.GeneratePdfReport();
+            Console.WriteLine("PDF flights report done!");
             
             // Task 4: a) Genetare JSON reports from SQL Server to file system.
             JsonFileExporter.GenerateReports();
