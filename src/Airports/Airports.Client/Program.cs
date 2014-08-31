@@ -17,7 +17,7 @@
              * b) Import data MongoDb into SQL Server. */
 
             var airportsData = new AirportsData();
-            
+
             var zipExtractor = new ZipExtractor();
             Console.WriteLine("Unpacking zip archive...");
             zipExtractor.Extract(SampleFlightsArchivedFilePath, SampleFlightsUnpackedDestinationPath);
@@ -35,9 +35,14 @@
             Console.WriteLine("Done.");
 
             //Task 2: Generate PDF Reports
-            Console.WriteLine("Exporting PDF flights report....");
+            Console.WriteLine("Exporting PDF flights report...");
             PdfFileExporter.GeneratePdfReport();
             Console.WriteLine("PDF flights report done!");
+
+            //Tast 3: Generate report in XML format 
+            Console.WriteLine("Exporting XML airlines report...");
+            XmlFileExporter.GenerateAirlinesReport(airportsData);
+            Console.WriteLine("XML airlines report done!");
             
             // Task 4: a) Genetare JSON reports from SQL Server to file system.
             JsonFileExporter.GenerateReports();
