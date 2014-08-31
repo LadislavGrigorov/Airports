@@ -11,15 +11,15 @@
         {
         }
 
-        public DbSet<Airline> Airlines { get; set; }
+        public IDbSet<Airline> Airlines { get; set; }
 
-        public DbSet<Airport> Airports { get; set; }
+        public IDbSet<Airport> Airports { get; set; }
 
-        public DbSet<Flight> Flights { get; set; }
+        public IDbSet<Flight> Flights { get; set; }
 
-        public DbSet<City> Cities { get; set; }
+        public IDbSet<City> Cities { get; set; }
 
-        public DbSet<Country> Countries { get; set; }
+        public IDbSet<Country> Countries { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

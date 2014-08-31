@@ -5,7 +5,7 @@
     using System;
     using System.Collections.Generic;
 
-    class AirportsData : IAirportsData
+    public class AirportsData : IAirportsData
     {
         private IAirportsDbContext dbContext;
         private IDictionary<Type, object> repositories;
@@ -95,7 +95,7 @@
                     type = typeof(Country);
                 }
 
-                this.repositories.Add(typeOfModel, Activator.CreateInstance(type, new[]{new Country()}));
+                this.repositories.Add(typeOfModel, Activator.CreateInstance(type, this.dbContext));
             }
 
             return (IRepository<T>)this.repositories[typeOfModel];

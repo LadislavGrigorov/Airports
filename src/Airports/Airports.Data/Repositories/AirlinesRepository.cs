@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Airports.Data.Repositories
 {
-    class AirlinesRepository : Repository<Airline>
+    public class AirlinesRepository : Repository<Airline>
     {
         public AirlinesRepository(IAirportsDbContext dbContext)
             : base(dbContext)

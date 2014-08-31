@@ -66,8 +66,8 @@
     <Compile Include="Repositories\AirlinesRepository.cs" />
     <Compile Include="Repositories\AirportsRepository.cs" />
     <Compile Include="Repositories\FlightsRepository.cs" />
-    <Compile Include="Repositories\IAirportsData.cs" />
-    <Compile Include="Repositories\IAirportsDbContext.cs" />
+    <Compile Include="IAirportsData.cs" />
+    <Compile Include="IAirportsDbContext.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>

@@ -12,7 +12,6 @@
         public AirportsRepository(IAirportsDbContext dbContext)
             : base(dbContext)
         {
-
         }
 
         public override Airport GetById(int id)

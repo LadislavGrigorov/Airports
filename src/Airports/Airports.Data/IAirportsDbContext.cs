@@ -6,15 +6,15 @@
 
     public interface IAirportsDbContext
     {
-        DbSet<Airline> Airlines { get; set; }
+        IDbSet<Airline> Airlines { get; set; }
 
-        DbSet<Airport> Airports { get; set; }
+        IDbSet<Airport> Airports { get; set; }
 
-        DbSet<Flight> Flights { get; set; }
+        IDbSet<Flight> Flights { get; set; }
 
-        DbSet<City> Cities { get; set; }
+        IDbSet<City> Cities { get; set; }
 
-        DbSet<Country> Countries { get; set; }
+        IDbSet<Country> Countries { get; set; }
 
         IDbSet<T> GetDataSet<T>() where T : class;
 

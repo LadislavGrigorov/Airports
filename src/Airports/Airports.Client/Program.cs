@@ -20,29 +20,32 @@
             /*Task 1:
              * a) Extract *.xls and *.xlsx files from a zip archive; read and load the data into SQL Server.
              * b) Import data MongoDb into SQL Server. */
-            using (AirportsDbContext dbContext = new AirportsDbContext())
-            {
-                var sqlServerLoader = new SqlServerDataLoader();
+            //using (AirportsDbContext dbContext = new AirportsDbContext())
+            //{
+            //    var sqlServerLoader = new SqlServerDataLoader();
 
-                var zipExtractor = new ZipExtractor();
-                Console.WriteLine("Unpacking zip archive...");
-                zipExtractor.Extract(SampleFlightsArchivedFilePath, SampleFlightsUnpackedDestinationPath);
+            //    var zipExtractor = new ZipExtractor();
+            //    Console.WriteLine("Unpacking zip archive...");
+            //    zipExtractor.Extract(SampleFlightsArchivedFilePath, SampleFlightsUnpackedDestinationPath);
                 
-                var excelDataImporter = new ExcelDataImporter();
-                Console.WriteLine("Importing xls flight data from directory...");
-                var importedFlights = excelDataImporter.ImportFlightsDataFromDirectory(SampleFlightsUnpackedDestinationPath);
+            //    var excelDataImporter = new ExcelDataImporter();
+            //    Console.WriteLine("Importing xls flight data from directory...");
+            //    var importedFlights = excelDataImporter.ImportFlightsDataFromDirectory(SampleFlightsUnpackedDestinationPath);
                 
-                Console.WriteLine("Loading imported flights to SQL Server...");
-                foreach (var flight in importedFlights)
-                {
-                    sqlServerLoader.LoadFlight(flight, dbContext);
-                }
+            //    Console.WriteLine("Loading imported flights to SQL Server...");
+            //    foreach (var flight in importedFlights)
+            //    {
+            //        sqlServerLoader.LoadFlight(flight, dbContext);
+            //    }
 
-                Console.WriteLine("Done.");
-            }			// Task 4: a) Genetare JSON reports from SQL Server to file system.
-            JsonFileExporter.GenerateReports();
+            //    Console.WriteLine("Done.");
+            //}			
+            
+            //// Task 4: a) Genetare JSON reports from SQL Server to file system.
+            //JsonFileExporter.GenerateReports();
+            
 			//throws Exception using the new API(AirportsData), not ready for using yet
-            //DbContentTester.PrintCountriesAndTheirCities();
+            DbContentTester.PrintCountriesAndTheirCities();
             //DbContentTester.PrintAllFlightsData();
         }
     }

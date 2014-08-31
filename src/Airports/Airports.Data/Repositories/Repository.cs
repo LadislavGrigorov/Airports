@@ -16,7 +16,7 @@
         public Repository(IAirportsDbContext dbContext)
         {
             this.dbContext = dbContext;
-            this.dataSet = dbContext.GetDataSet<T>();
+            this.dataSet = this.dbContext.GetDataSet<T>();
         }
 
         public IQueryable<T> GetAll()
