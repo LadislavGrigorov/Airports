@@ -29,7 +29,7 @@
             return this.GetAll().Where(conditions);
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             var entry = AttachIfDetached(entity);
             entry.State = EntityState.Added;

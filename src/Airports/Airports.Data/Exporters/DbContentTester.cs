@@ -1,8 +1,6 @@
 ﻿namespace Airports.Data.Exporters
 {
     using Airports.Data;
-    using Airports.Models;
-    using Airports.Data.Repositories;
     using System;
     using System.Linq;
 
@@ -15,11 +13,9 @@
 
         public static void PrintCountriesAndTheirCities()
         {
-            var countriesRepo = new Repository<Country>(new AirportsDbContext());
+            var airportsData = new AirportsData();
 
-            //var airportsData = new AirportsData();
-
-            var countries = countriesRepo.GetAll().ToList();
+            var countries = airportsData.Countries.GetAll().ToList();
 
             foreach (var country in countries)
             {
@@ -29,7 +25,7 @@
 
                 foreach (var city in cities)
                 {
-                    Console.WriteLine(city.Name);
+                    Console.WriteLine(" " + city.Name);
                 }
             }
 
@@ -40,7 +36,7 @@
         {
             var airportsData = new AirportsData();
             var flights = airportsData.Flights.GetAll().ToList();
-
+            
             foreach (var flight in flights)
             {
                 Console.WriteLine("{0}:, {1}, {2} hours, {3} -> {4}, ({5})", 

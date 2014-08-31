@@ -1,6 +1,6 @@
 ﻿namespace Airports.Data
 {
-    using Airports.Data.Repositories;
+    using Airports.Data.Migrations;
     using Airports.Models;
     using System.Data.Entity;
     
@@ -9,6 +9,7 @@
         public AirportsDbContext()
             : base("AirportsDb")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AirportsDbContext, Configuration>());
         }
 
         public IDbSet<Airline> Airlines { get; set; }

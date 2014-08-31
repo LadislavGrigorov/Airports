@@ -3,7 +3,7 @@
     using Airports.Data.Repositories;
     using Airports.Models;
 
-    interface IAirportsData
+    public interface IAirportsData
     {
         AirportsRepository Airports { get; }
 
@@ -14,5 +14,7 @@
         IRepository<City> Cities { get; }
 
         IRepository<Country> Countries { get; }
+
+        void SaveChanges();
     }
 }

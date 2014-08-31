@@ -1,9 +1,5 @@
 ﻿using Airports.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Airports.Data.Repositories
 {
@@ -14,9 +10,17 @@ namespace Airports.Data.Repositories
         {
         }
 
+         public override void Add(Flight entity)
+         {
+             if (this.SearchFor(f => f.FlightCode == entity.FlightCode).Count() == 0)
+             {
+                 base.Add(entity);
+             }
+         }
+
         public override Flight GetById(int id)
         {
-            return this.GetAll().Single(f => f.FlightId.Equals(id));
+            return this.GetAll().FirstOrDefault(f => f.FlightId.Equals(id));
         }
     }
 }

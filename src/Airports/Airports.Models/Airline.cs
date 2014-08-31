@@ -19,7 +19,6 @@ namespace Airports.Models
 
         [Required]
         [MaxLength(30)]
-        [Index(IsUnique = true)]
         public string Name { get; set; }
 
         [InverseProperty("Airline")]

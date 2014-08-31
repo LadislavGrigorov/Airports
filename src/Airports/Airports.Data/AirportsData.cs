@@ -13,6 +13,7 @@
         public AirportsData()
             : this(new AirportsDbContext())
         {
+            
         }
 
         public AirportsData(IAirportsDbContext context)
@@ -76,23 +77,23 @@
 
                 if (typeOfModel.IsAssignableFrom(typeof(Airport)))
                 {
-                    type = typeof(Airport);
+                    type = typeof(AirportsRepository);
                 }
                 else if (typeOfModel.IsAssignableFrom(typeof(Airline)))
                 {
-                    type = typeof(Airline);
+                    type = typeof(AirlinesRepository);
                 }
                 else if (typeOfModel.IsAssignableFrom(typeof(Flight)))
                 {
-                    type = typeof(Flight);
+                    type = typeof(FlightsRepository);
                 }
                 else if (typeOfModel.IsAssignableFrom(typeof(City)))
                 {
-                    type = typeof(City);
+                    type = typeof(Repository<City>);
                 }
                 else if (typeOfModel.IsAssignableFrom(typeof(Country)))
                 {
-                    type = typeof(Country);
+                    type = typeof(Repository<Country>);
                 }
 
                 this.repositories.Add(typeOfModel, Activator.CreateInstance(type, this.dbContext));
