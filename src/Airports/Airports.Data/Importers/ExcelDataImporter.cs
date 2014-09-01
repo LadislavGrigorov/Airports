@@ -16,12 +16,12 @@
                                                     the naming convention for an xls/xlsx [{0}] data file.";
 
         private const string WorksheetFileExtensionPattern = @".xls[x]?\b";
-        private const string FlightsWorksheetFilePathPattern = @"\w{3}-(Departures|Arrivals)-\d{2}-\w{3}-\d{4}.xls[x]?\b";
+        private const string FlightsWorksheetFilePattern = @"\w{3}-(Departures|Arrivals)-\d{2}-\w{3}-\d{4}.xls[x]?\b";
 
         public ICollection<Flight> ImportFlightsDataFromDirectory(string directoryPath)
         {
             IEnumerable<string> filePaths = Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories)
-                                     .Where(p => Regex.IsMatch(p, FlightsWorksheetFilePathPattern));
+                                     .Where(p => Regex.IsMatch(p, FlightsWorksheetFilePattern));
 
             ICollection<Flight> importedFlights = new HashSet<Flight>();
 
@@ -38,7 +38,7 @@
 
         public ICollection<Flight> ImportFlightsDataFromFile(string filePath)
         {
-            if (!Regex.IsMatch(filePath, FlightsWorksheetFilePathPattern))
+            if (!Regex.IsMatch(filePath, FlightsWorksheetFilePattern))
             {
                 throw new ArgumentException(string.Format(InvalidFileNameMessage, "Flights"));
             }
