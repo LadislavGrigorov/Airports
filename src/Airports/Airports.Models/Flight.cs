@@ -1,5 +1,6 @@
 namespace Airports.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -14,12 +15,14 @@ namespace Airports.Models
         [ForeignKey("DepartureAirport")]
         public int DepartureAirportId { get; set; }
 
+        [JsonIgnore]
         public virtual Airport DepartureAirport { get; set; }
 
         [Required]
         [ForeignKey("ArrivalAirport")]
         public int ArrivalAirportId { get; set; }
 
+        [JsonIgnore]
         public virtual Airport ArrivalAirport { get; set; }
 
         [Required]
@@ -36,6 +39,7 @@ namespace Airports.Models
         [ForeignKey("Airline")]
         public int? AirlineId { get; set; }
 
+        [JsonIgnore]
         public virtual Airline Airline { get; set; }
     }
 }

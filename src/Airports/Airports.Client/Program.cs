@@ -13,6 +13,7 @@
         private const string SampleFlightsArchivedFilePath = @"..\..\..\..\Imports\Sample-Flights.zip";
         private const string SampleFlightsUnpackedDestinationPath = @"..\..\..\..\Imports\Sample-Flights-Unpacked\";
         private const string SampleFlightsDataXmlFilePath = @"..\..\..\..\Imports\CDG-Departures-01-Sep-2014.xml";
+        private const string JsonReportsFolderPath = @"..\..\..\..\Exports\Json-Reports\";
 
         static void Main()
         {
@@ -49,7 +50,7 @@
             Console.WriteLine("XML airlines report done!");
             
             // Task 4: a) Genetare JSON reports from SQL Server to file system.
-            JsonFileExporter.GenerateReports();
+            JsonFileExporter.GenerateReports(airportsData, JsonReportsFolderPath);
 
             /* Task 5: Load Data from XML and save it in SQL Server and MongoDb */
             Console.WriteLine("Importing flights data from xml file...");
