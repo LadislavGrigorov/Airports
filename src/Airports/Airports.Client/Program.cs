@@ -57,6 +57,9 @@
             // Task 4: a) Genetare JSON reports from SQL Server to file system.
             JsonFileExporter.GenerateReports(airportsData, JsonReportsFolderPath);
 
+            // Task 4: b) Import reports from file system (.json files).
+            MySqlReportsImporter.ImportJsonReport(JsonReportsFolderPath);
+
             /* Task 5: Load Data from XML and save it in SQL Server and MongoDb */
             Console.WriteLine("Importing flights data from xml file...");
             XmlDataImporter xmlDataImporter = new XmlDataImporter();

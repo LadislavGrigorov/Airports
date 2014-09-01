@@ -24,14 +24,6 @@
                 using (var writer = new StreamWriter(reportsFolderPath + flight.FlightId + Extension))
                 {
                     writer.Write(json);
-                    //writer.WriteLine("{");
-                    //writer.WriteLine("\t\"flight-id\" : " + flight.FlightId);
-                    //writer.WriteLine("\t\"departure-airport-id\" : " + flight.DepartureAirportId);
-                    //writer.WriteLine("\t\"arrival-airport-id\" : " + flight.ArrivalAirportId);
-                    //writer.WriteLine("\t\"flight-code\" : " + flight.FlightCode);
-                    //writer.WriteLine("\t\"duration-hours\" : " + flight.DurationHours);
-                    //writer.WriteLine("\t\"airline-id\" : " + flight.AirlineId);
-                    //writer.WriteLine("}");
                 }
             }
 

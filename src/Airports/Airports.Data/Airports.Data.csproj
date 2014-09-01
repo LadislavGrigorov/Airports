@@ -58,6 +58,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.OpenAccess, Version=2014.2.711.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2014.2.711.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirportsData.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Exporters\ExportHelper.cs" />
     <Compile Include="Exporters\XmlFileExporter.cs" />
     <Compile Include="Importers\ExcelDataImporter.cs" />
+    <Compile Include="Importers\MySqlReportsImporter.cs" />
     <Compile Include="Importers\XmlDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -94,6 +97,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Airports.Models.MySql\Airports.Models.MySql.csproj">
+      <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
+      <Name>Airports.Models.MySql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Airports.Models\Airports.Models.csproj">
       <Project>{36632911-57fa-4320-b7e1-8e4ee3d12a52}</Project>
       <Name>Airports.Models</Name>
