@@ -7,32 +7,47 @@
     using iTextSharp.text;
     using iTextSharp.text.pdf;
 
-    public static class PdfFileExporter
-    {
-        private const string ReportsFolderPath = @"..\..\..\..\Exports\PDF-Reports\";
+    public class PdfFileExporter
+    { 
+        private const string FirstColumnName = "Flight";
+        private const string SecondColumnName = "Departure Airport";
+        private const string ThirdColumnName = "Arrival Airport";
+        private const string FourthColumnName = "Code";
+        private const string FifthColumnName = "Date";
+        private const string SixthColumnName = "Duration";
+        private const string SeventhColumnName = "Airline";
 
-        public static void GeneratePdfReport()
+        private readonly string filePath;
+        private readonly string fileName;
+        private readonly IAirportsData airportsData;
+
+        public PdfFileExporter(string filePath, string fileName, IAirportsData airportsData)
         {
-            CreateDirectoryIfNotExists(ReportsFolderPath);
+            this.filePath = filePath;
+            this.fileName = fileName;
+            this.airportsData = airportsData;
+        }
+
+        public void GeneratePdfReport()
+        {
+            this.CreateDirectoryIfNotExists(this.filePath);
             var document = new Document(PageSize.A4, 50, 50, 25, 25);
-            var output = new FileStream(@"..\..\..\..\Exports\PDF-Reports\flight-report.pdf", FileMode.Create, FileAccess.Write);
+            var output = new FileStream(this.filePath + this.fileName, FileMode.Create, FileAccess.Write);
             var writer = PdfWriter.GetInstance(document, output);
 
-            PdfPTable table = CreateTable();
-            AddTableHeader(table);
-            AddTableColumns(table);
-            FillTableData(table);
+            PdfPTable table = this.CreateTable();
+            this.AddTableHeader(table);
+            this.AddTableColumns(table);
+            this.FillTableData(table);
 
             document.Open();
             document.Add(table);
             document.Close();
         }
 
-        private static void FillTableData(PdfPTable table)
+        private void FillTableData(PdfPTable table)
         {
-            var airportsData = new AirportsData();
-
-            var flights = airportsData.Flights.GetAll().ToList();
+            var flights = this.airportsData.Flights.GetAll().ToList();
 
             foreach (var flight in flights)
             {
@@ -46,18 +61,18 @@
             }
         }
 
-        private static void AddTableColumns(PdfPTable table)
+        private void AddTableColumns(PdfPTable table)
         {
-            table.AddCell("Flight");
-            table.AddCell("Departure Airport");
-            table.AddCell("Arrival Airport");
-            table.AddCell("Code");
-            table.AddCell("Date");
-            table.AddCell("Duration");
-            table.AddCell("Airline");
+            table.AddCell(FirstColumnName);
+            table.AddCell(SecondColumnName);
+            table.AddCell(ThirdColumnName);
+            table.AddCell(FourthColumnName);
+            table.AddCell(FifthColumnName);
+            table.AddCell(SixthColumnName);
+            table.AddCell(SeventhColumnName);
         }
 
-        private static void AddTableHeader(PdfPTable table)
+        private void AddTableHeader(PdfPTable table)
         {
             PdfPCell cell = new PdfPCell(new Phrase("Flights"));
             cell.Colspan = 7;
@@ -66,7 +81,7 @@
             table.AddCell(cell);
         }
 
-        private static PdfPTable CreateTable()
+        private PdfPTable CreateTable()
         {
             PdfPTable table = new PdfPTable(7);
             table.WidthPercentage = 100;
@@ -79,7 +94,7 @@
             return table;
         }
 
-        private static void CreateDirectoryIfNotExists(string path)
+        private void CreateDirectoryIfNotExists(string path)
         {
             // TODO: Handle possible exceptions
             if (Directory.Exists(path) == false)
