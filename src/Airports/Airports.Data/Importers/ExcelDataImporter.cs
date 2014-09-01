@@ -12,29 +12,37 @@
 
     public class ExcelDataImporter
     {
+        private const string InvalidFileNameMessage = @"Provided file name is either invalid or does not match 
+                                                    the naming convention for an xls/xlsx [{0}] data file.";
+
         private const string WorksheetFileExtensionPattern = @".xls[x]?\b";
-        private const string FlightsWorksheetPattern = @"\b\w{3}-(Departures|Arrivals)-\d{2}-\w{3}-\d{4}.xls[x]?\b";
+        private const string FlightsWorksheetFilePathPattern = @"\w{3}-(Departures|Arrivals)-\d{2}-\w{3}-\d{4}.xls[x]?\b";
 
         public ICollection<Flight> ImportFlightsDataFromDirectory(string directoryPath)
         {
             IEnumerable<string> filePaths = Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories)
-                                     .Where(p => Regex.IsMatch(p, FlightsWorksheetPattern));
+                                     .Where(p => Regex.IsMatch(p, FlightsWorksheetFilePathPattern));
 
-            ICollection<Flight> flights = new HashSet<Flight>();
+            ICollection<Flight> importedFlights = new HashSet<Flight>();
 
             foreach (var path in filePaths)
             {
                 foreach (var flight in this.ImportFlightsDataFromFile(path))
                 {
-                    flights.Add(flight);
+                    importedFlights.Add(flight);
                 }
             }
 
-            return flights;
+            return importedFlights;
         }
 
         public ICollection<Flight> ImportFlightsDataFromFile(string filePath)
         {
+            if (!Regex.IsMatch(filePath, FlightsWorksheetFilePathPattern))
+            {
+                throw new ArgumentException(string.Format(InvalidFileNameMessage, "Flights"));
+            }
+
             OleDbConnection connection = new OleDbConnection();
             connection.ConnectionString = string.Format(ConnectionStrings.Default.ExcelReaderConnectionString, filePath);
 
@@ -47,7 +55,7 @@
 
                 OleDbCommand selectAllRowsCommand = new OleDbCommand("SELECT * FROM [" + sheetName + "]", connection);
 
-                ICollection<Flight> flights = new HashSet<Flight>();
+                ICollection<Flight> importedFlights = new HashSet<Flight>();
 
                 using (OleDbDataAdapter adapter = new OleDbDataAdapter(selectAllRowsCommand))
                 {
@@ -77,7 +85,7 @@
                                     ArrivalAirportId = arrivalAirportId
                                 };
 
-                                flights.Add(flight);
+                                importedFlights.Add(flight);
                             }
                             catch (FormatException)
                             { }
@@ -85,7 +93,7 @@
                     }
                 }
 
-                return flights;
+                return importedFlights;
             }
         }
     }
