@@ -63,6 +63,8 @@
     </Compile>
     <Compile Include="Exporters\JsonFileExporter.cs" />
     <Compile Include="Exporters\PdfFileExporter.cs" />
+    <Compile Include="Exporters\ExportHelper.cs" />
+    <Compile Include="Exporters\XmlFileExporter.cs" />
     <Compile Include="Importers\ExcelDataImporter.cs" />
     <Compile Include="Importers\XmlDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
