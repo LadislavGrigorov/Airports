@@ -17,6 +17,8 @@
 
         private const string JsonReportsFolderPath = @"..\..\..\..\Exports\Json-Reports\";
 
+        private const string ExcelReportsFolderPath = @"..\..\..\..\Exports\Excel-Reports\";
+
         private const string PdfReportsFolderPath = @"..\..\..\..\Exports\PDF-Reports\";
         private const string PdfReportsFileName = @"flight-report.pdf";
 
@@ -126,6 +128,9 @@
             }
 
             airportsData.SaveChanges();
+
+            /* Task 6: Export merged report from MySql and SQLite to Excel 2007 file */
+            ExcelReportExporter.GenerateExcelFile(ExcelReportsFolderPath);
         }
     }
 }
