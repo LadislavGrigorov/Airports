@@ -14,11 +14,8 @@
         private const string SampleFlightsArchivedFilePath = @"..\..\..\..\imports\Sample-Flights.zip";
         private const string SampleFlightsUnpackedDestinationPath = @"..\..\..\..\imports\Sample-Flights-Unpacked\";
         private const string SampleFlightsDataXmlFilePath = @"..\..\..\..\imports\CDG-Departures-01-Sep-2014.xml";
-
         private const string JsonReportsDestionationPath = @"..\..\..\..\exports\Json-Reports\";
-
         private const string ExcelReportsDestinationPath = @"..\..\..\..\exports\Excel-Reports\";
-
         private const string PdfReportsFolderPath = @"..\..\..\..\exports\PDF-Reports\";
         private const string PdfReportsFileName = @"flight-report.pdf";
 
@@ -73,8 +70,8 @@
         private static void GeneratePdfFlightsReport(IAirportsDataSqlServer airportsData)
         {
             Console.WriteLine("Exporting PDF flight report...");
-            var pdfExporter = new PdfFileExporter(PdfReportsFolderPath, PdfReportsFileName, airportsData);
-            pdfExporter.GeneratePdfReport();
+            var pdfExporter = new PdfFileExporter();
+            pdfExporter.GenerateFlightReport(PdfReportsFolderPath, PdfReportsFileName, airportsData);
             Console.WriteLine("PDF flights report done!");
         }
 
