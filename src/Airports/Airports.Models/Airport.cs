@@ -32,15 +32,29 @@
         [InverseProperty("ArrivalAirport")]
         public virtual ICollection<Flight> ArrivalFlights
         {
-            get { return this.arrivalFlights; }
-            set { this.arrivalFlights = value; }
+            get 
+            { 
+                return this.arrivalFlights; 
+            }
+
+            set 
+            { 
+                this.arrivalFlights = value; 
+            }
         }
 
         [InverseProperty("DepartureAirport")]
         public virtual ICollection<Flight> DepartureFlights
         {
-            get { return this.departureFlights; }
-            set { this.departureFlights = value; }
+            get 
+            { 
+                return this.departureFlights; 
+            }
+
+            set 
+            { 
+                this.departureFlights = value; 
+            }
         }
 
         [ForeignKey("City")]

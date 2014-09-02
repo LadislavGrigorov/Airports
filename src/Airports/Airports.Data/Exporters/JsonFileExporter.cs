@@ -11,8 +11,6 @@
         
         public static void GenerateReports(IAirportsData context, string reportsFolderPath)
         {
-            Console.WriteLine("Exporting data to JSON reports...");
-
             CreateDirectoryIfNotExists(reportsFolderPath);
 
             var allFlights = context.Flights.GetAll().ToList();
@@ -28,7 +26,6 @@
             }
 
             // TODO: Handle possible exceptions
-            Console.WriteLine("Done.");
         }
 
         private static void CreateDirectoryIfNotExists(string path)

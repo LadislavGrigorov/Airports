@@ -1,30 +1,18 @@
 ﻿namespace Airports.Data.Exporters
 {
     using System;
-    using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Xml.Linq;
 
     public class XmlFileExporter
     {
         private const string ReportsFolderPath = @"..\..\..\..\Exports\Xml-Reports\";
 
-        public static void GenerateAirlinesReport(AirportsData database)
+        public static void GenerateAirlinesReport(IAirportsData database)
         {
             ExportHelper.CreateDirectoryIfNotExists(ReportsFolderPath);
 
             var airlines = database.Airlines.GetAll().ToList();
-
-            var flights = database.Flights.GetAll().Select(flight => new
-            {
-                AirlineID = flight.AirlineId,
-                DepartureAirport = flight.DepartureAirport.Name,
-                ArivalAirport = flight.ArrivalAirport.Name,
-                Code = flight.FlightCode
-            }).ToList();
 
             XDocument xdoc = new XDocument(new XElement("airlines",
                 from airline in airlines

@@ -21,12 +21,30 @@
 
         static void Main()
         {
+            IAirportsData airportsData = new AirportsData();
+
             /*Task 1:
              * a) Extract *.xls and *.xlsx files from a zip archive; read and load the data into SQL Server.
              * b) Import data from MongoDb to SQL Server. */
+            ExtractZipAndImportDataFromExcelAndMongoDb(airportsData);
+            
 
-            var airportsData = new AirportsData();
+            //Task 2: Generate PDF Reports
+            GeneratePdfFlightsReport(airportsData);
 
+            //Tast 3: Generate report in XML format 
+            GenerateXmlFlightsReport(airportsData);
+
+            // Task 4: a) Genetare JSON reports from SQL Server to file system.
+            //         b) Import reports from file system (.json files) to MySQL.
+            GenerateJsonFlightsReportsAndLoadToMySql(airportsData);
+
+            /* Task 5: Load Data from XML and save it in SQL Server and MongoDb */
+            
+        }
+
+        private static void ExtractZipAndImportDataFromExcelAndMongoDb(IAirportsData airportsData)
+        {
             Console.WriteLine("Unpacking zip archive...");
             var zipExtractor = new ZipExtractor();
             zipExtractor.Extract(SampleFlightsArchivedFilePath, SampleFlightsUnpackedDestinationPath);
@@ -37,40 +55,50 @@
                 .ImportFlightsDataFromDirectory(SampleFlightsUnpackedDestinationPath);
 
             Console.WriteLine("Loading imported flights to SQL Server...");
+
             foreach (var flight in importedFlights)
             {
                 airportsData.Flights.Add(flight);
             }
-            airportsData.SaveChanges();
 
-            //Task 2: Generate PDF Reports
-            Console.WriteLine("Exporting PDF flights report...");
+            airportsData.SaveChanges();
+        }
+
+        private static void GeneratePdfFlightsReport(IAirportsData airportsData)
+        {
+            Console.WriteLine("Exporting PDF flight report...");
             var pdfExporter = new PdfFileExporter(PdfReportsFolderPath, PdfReportsFileName, airportsData);
             pdfExporter.GeneratePdfReport();
             Console.WriteLine("PDF flights report done!");
+        }
 
-            //Tast 3: Generate report in XML format 
+        private static void GenerateXmlFlightsReport(IAirportsData airportsData)
+        {
             Console.WriteLine("Exporting XML airlines report...");
             XmlFileExporter.GenerateAirlinesReport(airportsData);
             Console.WriteLine("XML airlines report done!");
+        }
 
-            // Task 4: a) Genetare JSON reports from SQL Server to file system.
+        private static void GenerateJsonFlightsReportsAndLoadToMySql(IAirportsData airportsData)
+        {
             JsonFileExporter.GenerateReports(airportsData, JsonReportsFolderPath);
-
-            // Task 4: b) Import reports from file system (.json files).
             MySqlReportsImporter.ImportJsonReport(JsonReportsFolderPath);
+        }
 
-            /* Task 5: Load Data from XML and save it in SQL Server and MongoDb */
+        private static void ImportFlightsDataFromXmlAndLoadToMongoDb(IAirportsData airportsData)
+        {
             Console.WriteLine("Importing flights data from xml file...");
             XmlDataImporter xmlDataImporter = new XmlDataImporter();
             ICollection<Flight> importedFlightsFromXml = xmlDataImporter
                 .ImportFlightsDataFromFile(SampleFlightsDataXmlFilePath);
 
             Console.WriteLine("Loading imported flights to SQL Server...");
+
             foreach (var flight in importedFlightsFromXml)
             {
                 airportsData.Flights.Add(flight);
             }
+
             airportsData.SaveChanges();
         }
     }

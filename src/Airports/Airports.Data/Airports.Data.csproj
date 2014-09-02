@@ -74,12 +74,12 @@
     <Compile Include="Exporters\ExportHelper.cs" />
     <Compile Include="Exporters\XmlFileExporter.cs" />
     <Compile Include="Importers\ExcelDataImporter.cs" />
+    <Compile Include="Importers\MongoDbDataImporter.cs" />
     <Compile Include="Importers\MySqlReportsImporter.cs" />
     <Compile Include="Importers\XmlDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Exporters\DbContentTester.cs" />
     <Compile Include="Repositories\AirlinesRepository.cs" />
     <Compile Include="Repositories\AirportsRepository.cs" />
     <Compile Include="Repositories\FlightsRepository.cs" />

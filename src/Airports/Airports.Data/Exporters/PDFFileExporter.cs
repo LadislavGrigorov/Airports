@@ -48,6 +48,8 @@
         private void FillTableData(PdfPTable table)
         {
             var flights = this.airportsData.Flights.GetAll().ToList();
+            var airports = this.airportsData.Airports.GetAll().ToArray();
+            var airlines = this.airportsData.Airlines.GetAll().ToList();
 
             foreach (var flight in flights)
             {
