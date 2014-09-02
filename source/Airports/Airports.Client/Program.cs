@@ -73,8 +73,8 @@
         private static void GeneratePdfFlightsReport(IAirportsDataSqlServer airportsData)
         {
             Console.WriteLine("Exporting PDF flight report...");
-            var pdfExporter = new PdfFileExporter(PdfReportsFolderPath, PdfReportsFileName, airportsData);
-            pdfExporter.GeneratePdfReport();
+            var pdfExporter = new PdfFileExporter();
+            pdfExporter.GeneratePdfReport(PdfReportsFolderPath, PdfReportsFileName, airportsData);
             Console.WriteLine("PDF flights report done!");
         }
 

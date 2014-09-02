@@ -1,53 +1,42 @@
 ﻿namespace Airports.SqlServer.Data.Exporters
 {
+    using System.IO;
+    using System.Linq;
     using Airports.Data.SqlServer;
     using iTextSharp.text;
     using iTextSharp.text.pdf;
-    using System.IO;
-    using System.Linq;
 
     public class PdfFileExporter
-    { 
-        private const string FirstColumnName = "Flight";
-        private const string SecondColumnName = "Departure Airport";
-        private const string ThirdColumnName = "Arrival Airport";
-        private const string FourthColumnName = "Code";
-        private const string FifthColumnName = "Date";
-        private const string SixthColumnName = "Duration";
-        private const string SeventhColumnName = "Airline";
+    {
+        private const string FlightIdColumnHeader = "Flight";
+        private const string DepartureAirportColumnHeader = "Departure Airport";
+        private const string ArrivalAirportColumnHeader = "Arrival Airport";
+        private const string FlightCodeColumnHeader = "Code";
+        private const string FlightDateColumnHeader = "Date";
+        private const string FlightDurationColumnHeader = "Duration";
+        private const string FlightAirlineColumnHeader = "Airline";
 
-        private readonly string filePath;
-        private readonly string fileName;
-        private readonly IAirportsDataSqlServer airportsData;
-
-        public PdfFileExporter(string filePath, string fileName, IAirportsDataSqlServer airportsData)
+        public void GeneratePdfReport(string filePath, string fileName, IAirportsDataSqlServer airportsData)
         {
-            this.filePath = filePath;
-            this.fileName = fileName;
-            this.airportsData = airportsData;
-        }
-
-        public void GeneratePdfReport()
-        {
-            this.CreateDirectoryIfNotExists(this.filePath);
+            this.CreateDirectoryIfNotExists(filePath);
             var document = new Document(PageSize.A4, 50, 50, 25, 25);
-            var output = new FileStream(this.filePath + this.fileName, FileMode.Create, FileAccess.Write);
+            var output = new FileStream(filePath + fileName, FileMode.Create, FileAccess.Write);
             var writer = PdfWriter.GetInstance(document, output);
 
             PdfPTable table = this.CreateTable();
             this.AddTableHeader(table);
             this.AddTableColumns(table);
-            this.FillTableData(table);
+            this.FillTableData(table, airportsData);
 
             document.Open();
             document.Add(table);
             document.Close();
         }
 
-        private void FillTableData(PdfPTable table)
+        private void FillTableData(PdfPTable table, IAirportsDataSqlServer airportsData)
         {
-            var flights = this.airportsData.Flights.GetAll().ToList();
-            
+            var flights = airportsData.Flights.GetAll().ToList();
+
             foreach (var flight in flights)
             {
                 table.AddCell(flight.FlightId.ToString());
@@ -62,13 +51,13 @@
 
         private void AddTableColumns(PdfPTable table)
         {
-            table.AddCell(FirstColumnName);
-            table.AddCell(SecondColumnName);
-            table.AddCell(ThirdColumnName);
-            table.AddCell(FourthColumnName);
-            table.AddCell(FifthColumnName);
-            table.AddCell(SixthColumnName);
-            table.AddCell(SeventhColumnName);
+            table.AddCell(FlightIdColumnHeader);
+            table.AddCell(DepartureAirportColumnHeader);
+            table.AddCell(ArrivalAirportColumnHeader);
+            table.AddCell(FlightCodeColumnHeader);
+            table.AddCell(FlightDateColumnHeader);
+            table.AddCell(FlightDurationColumnHeader);
+            table.AddCell(FlightAirlineColumnHeader);
         }
 
         private void AddTableHeader(PdfPTable table)
