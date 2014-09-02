@@ -5,6 +5,7 @@
     using System;
     using System.Linq;
     using System.Xml.Linq;
+    using System.Data.Entity;
 
     public class XmlFileExporter
     {
@@ -15,7 +16,7 @@
             ExportHelper.CreateDirectoryIfNotExists(ReportsFolderPath);
 
             var airlines = database.Airlines.GetAll().ToList();
-
+                
             XDocument xdoc = new XDocument(new XElement("airlines",
                 from airline in airlines
                 select new XElement("airline",

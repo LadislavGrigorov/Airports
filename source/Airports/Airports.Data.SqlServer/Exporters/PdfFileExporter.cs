@@ -5,6 +5,7 @@
     using iTextSharp.text.pdf;
     using System.IO;
     using System.Linq;
+    using System.Data.Entity;
 
     public class PdfFileExporter
     { 
@@ -46,8 +47,23 @@
 
         private void FillTableData(PdfPTable table)
         {
-            var flights = this.airportsData.Flights.GetAll().ToList();
-            
+            //var flights = this.airportsData.Flights.GetAll().Select(flight => 
+            //    new 
+            //    {
+            //        Code = flight.FlightCode,
+            //        DepartureAirport = flight.DepartureAirport.Name,
+            //        ArrivalAirport = flight.ArrivalAirport,
+            //        Date = flight.FlightDate,
+            //        Duration = flight.DurationHours,
+            //        Airline = flight.Airline.Name
+            //    });
+
+            var flights = this.airportsData.Flights.GetAll()
+                .Include("DepartureAirport")
+                .Include("ArrivalAirport")
+                .Include("Airline")
+                .ToList();
+
             foreach (var flight in flights)
             {
                 table.AddCell(flight.FlightId.ToString());

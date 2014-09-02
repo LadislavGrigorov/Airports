@@ -3,6 +3,7 @@
     using Newtonsoft.Json;
     using System.IO;
     using System.Linq;
+    using System.Data.Entity;
 
     public static class JsonFileExporter
     {
@@ -12,7 +13,11 @@
         {
             CreateDirectoryIfNotExists(reportsFolderPath);
 
-            var allFlights = context.Flights.GetAll().ToList();
+            var allFlights = context.Flights.GetAll()
+               .Include("DepartureAirport")
+               .Include("ArrivalAirport")
+               .Include("Airline")
+               .ToList();
 
             foreach (var flight in allFlights)
             {

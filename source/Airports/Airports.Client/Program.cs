@@ -13,7 +13,7 @@
     {
         private const string SampleFlightsArchivedFilePath = @"..\..\..\..\imports\Sample-Flights.zip";
         private const string SampleFlightsUnpackedDestinationPath = @"..\..\..\..\imports\Sample-Flights-Unpacked\";
-        private const string SampleFlightsDataXmlFilePath = @"..\..\..\..\mports\CDG-Departures-01-Sep-2014.xml";
+        private const string SampleFlightsDataXmlFilePath = @"..\..\..\..\imports\CDG-Departures-01-Sep-2014.xml";
 
         private const string JsonReportsDestionationPath = @"..\..\..\..\exports\Json-Reports\";
 
@@ -40,10 +40,10 @@
 
             // Task 4: a) Genetare JSON reports from SQL Server to file system.
             //         b) Import reports from file system (.json files) to MySQL.
-            //GenerateJsonFlightsReportsAndLoadToMySql(airportsData);
+            GenerateJsonFlightsReportsAndLoadToMySql(airportsData);
 
             /* Task 5: Load Data from XML and save it in SQL Server and MongoDb */
-            //ImportFlightsDataFromXmlAndLoadToMongoDb(airportsData, mongoData);
+            ImportFlightsDataFromXmlAndLoadToMongoDb(airportsData, mongoData);
 
             /* Task 6: Export merged report from MySql and SQLite to Excel 2007 file */
             //ExcelReportExporter.GenerateExcelFile(ExcelReportsFolderPath);
@@ -88,7 +88,7 @@
         private static void GenerateJsonFlightsReportsAndLoadToMySql(IAirportsDataSqlServer airportsData)
         {
             JsonFileExporter.GenerateReports(airportsData, JsonReportsDestionationPath);
-            MySqlReportsImporter.ImportJsonReport(JsonReportsDestionationPath);
+            //MySqlReportsImporter.ImportJsonReport(JsonReportsDestionationPath);
         }
 
         private static void ImportFlightsDataFromXmlAndLoadToMongoDb(IAirportsDataSqlServer airportsData, IAirportsDataMongoDb mongoData)
