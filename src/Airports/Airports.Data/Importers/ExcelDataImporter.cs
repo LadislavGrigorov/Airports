@@ -44,7 +44,7 @@
             }
 
             OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = string.Format(ConnectionStrings.Default.ExcelReaderConnectionString, filePath);
+            connection.ConnectionString = string.Format(AirportsDbSettings.Default.ExcelReaderConnectionString, filePath);
 
             connection.Open();
 

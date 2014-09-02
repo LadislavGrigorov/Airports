@@ -1,5 +1,6 @@
 ﻿namespace Airports.Models
 {
+    using MongoDB.Bson.Serialization.Attributes;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,6 +8,7 @@
     public class City
     {
         [Key]
+        [BsonId]
         public int CityId { get; set; }
 
         public string Name { get; set; }

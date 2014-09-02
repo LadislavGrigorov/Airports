@@ -62,6 +62,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Airports.Data.MongoDb\Airports.Data.MongoDb.csproj">
+      <Project>{19b70d04-2fce-4189-9877-8854e5feb55f}</Project>
+      <Name>Airports.Data.MongoDb</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Airports.Data\Airports.Data.csproj">
       <Project>{5e60cc95-05a6-4236-b204-cb157d36de57}</Project>
       <Name>Airports.Data</Name>

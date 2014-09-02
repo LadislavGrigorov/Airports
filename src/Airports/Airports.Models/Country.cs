@@ -1,5 +1,6 @@
 namespace Airports.Models
 {
+    using MongoDB.Bson.Serialization.Attributes;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -15,16 +16,25 @@ namespace Airports.Models
         }
 
         [Key]
+        [BsonId]
         public int CountryId { get; set; }
 
         [Required]
+        [BsonRequired]
         public string Name { get; set; }
 
         [InverseProperty("Country")]
         public virtual ICollection<City> Cities 
         {
-            get { return this.cities; }
-            set { this.cities = value; }
+            get 
+            { 
+                return this.cities; 
+            }
+
+            set 
+            { 
+                this.cities = value; 
+            }
         }
     }
 }

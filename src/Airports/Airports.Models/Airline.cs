@@ -3,6 +3,7 @@ namespace Airports.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using MongoDB.Bson.Serialization.Attributes;
 
     [Table("Airlines")]
     public class Airline
@@ -15,6 +16,7 @@ namespace Airports.Models
         }
 
         [Key]
+        [BsonId]
         public int AirlineId { get; set; }
 
         [Required]
@@ -24,8 +26,15 @@ namespace Airports.Models
         [InverseProperty("Airline")]
         public virtual ICollection<Flight> Flights
         {
-            get { return this.flights; }
-            set { this.flights = value; }
+            get 
+            { 
+                return this.flights; 
+            }
+
+            set 
+            {
+                this.flights = value; 
+            }
         }
     }
 }

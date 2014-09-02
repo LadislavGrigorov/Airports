@@ -64,17 +64,16 @@
   <ItemGroup>
     <Compile Include="AirportsData.cs" />
     <Compile Include="AirportsDbContext.cs" />
-    <Compile Include="ConnectionStrings.Designer.cs">
+    <Compile Include="AirportsDbSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>ConnectionStrings.settings</DependentUpon>
+      <DependentUpon>AirportsDbSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Exporters\JsonFileExporter.cs" />
     <Compile Include="Exporters\PdfFileExporter.cs" />
     <Compile Include="Exporters\ExportHelper.cs" />
     <Compile Include="Exporters\XmlFileExporter.cs" />
     <Compile Include="Importers\ExcelDataImporter.cs" />
-    <Compile Include="Importers\MongoDbDataImporter.cs" />
     <Compile Include="Importers\MySqlReportsImporter.cs" />
     <Compile Include="Importers\XmlDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
@@ -90,9 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ConnectionStrings.settings">
+    <None Include="AirportsDbSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>ConnectionStrings.Designer.cs</LastGenOutput>
+      <LastGenOutput>AirportsDbSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -106,9 +105,7 @@
       <Name>Airports.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Loaders\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
