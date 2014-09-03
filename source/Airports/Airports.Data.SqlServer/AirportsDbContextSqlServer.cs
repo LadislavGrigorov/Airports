@@ -10,8 +10,6 @@
             : base("AirportsDb")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AirportsDbContextSqlServer, Configuration>());
-            
-
         }
 
         public IDbSet<Airline> Airlines { get; set; }

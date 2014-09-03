@@ -54,8 +54,8 @@
     <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2014.2.711.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exporters\ExcelReportExporter.cs" />
-    <Compile Include="Importers\MySqlReportsImporter.cs" />
+    <Compile Include="Exporters\ExcelExporter.cs" />
+    <Compile Include="Importers\JsonDataImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

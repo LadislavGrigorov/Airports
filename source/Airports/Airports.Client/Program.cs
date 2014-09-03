@@ -19,7 +19,7 @@
         private const string JsonReportsDestionationPath = @"..\..\..\..\exports\Json-Reports\";
         private const string ExcelReportsDestinationPath = @"..\..\..\..\exports\Excel-Reports\";
         private const string PdfReportsFolderPath = @"..\..\..\..\exports\PDF-Reports\";
-        private const string PdfReportsFileName = @"flight-report.pdf";
+        private const string PdfReportsFileName = @"flight-report";
         private const string XmlReportsFolderPath = @"..\..\..\..\exports\Xml-Reports\";
 
         static void Main()
@@ -46,7 +46,7 @@
             ImportFlightsDataFromXmlAndLoadToMongoDb(airportsData, mongoData);
 
             ///* Task 6: Export merged report from MySql and SQLite to Excel 2007 file */
-            ExcelReportExporter.GenerateExcelFile(ExcelReportsDestinationPath);
+            ExcelExporter.GenerateExcelFile(ExcelReportsDestinationPath);
         }
 
         private static void ExtractZipAndImportDataFromExcelAndMongoDb(IAirportsDataSqlServer airportsData, IAirportsDataMongoDb mongoData)
@@ -74,7 +74,7 @@
         {
             Console.WriteLine("Exporting PDF flight report...");
             var pdfExporter = new PdfFileExporter();
-            pdfExporter.GenerateFlightReport(PdfReportsFolderPath, PdfReportsFileName, airportsData);
+            pdfExporter.GenerateAggregatedAirlineReports(PdfReportsFolderPath, PdfReportsFileName, airportsData);
             Console.WriteLine("PDF flights report done!");
         }
 
@@ -87,11 +87,11 @@
 
         private static void GenerateJsonFlightsReportsAndLoadToMySql(IAirportsDataSqlServer airportsData)
         {
-            var jsonExporter = new JsonFileExporter();
-            jsonExporter.GenerateReports(airportsData, JsonReportsDestionationPath);
+            var jsonExporter = new JsonExporter();
+            jsonExporter.GenerateReportsForGivenPeriod(airportsData, JsonReportsDestionationPath);
 
-            var mySqlImporter = new MySqlReportsImporter();
-            mySqlImporter.ImportJsonReport(JsonReportsDestionationPath);
+            var mySqlImporter = new JsonDataImporter();
+            mySqlImporter.ImportAirlineReports(JsonReportsDestionationPath);
         }
 
         private static void ImportFlightsDataFromXmlAndLoadToMongoDb(IAirportsDataSqlServer airportsData, IAirportsDataMongoDb mongoData)

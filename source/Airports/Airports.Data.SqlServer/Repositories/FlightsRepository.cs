@@ -1,8 +1,8 @@
-﻿using Airports.Models;
-using System.Linq;
-
-namespace Airports.Data.SqlServer.Repositories
+﻿namespace Airports.Data.SqlServer.Repositories
 {
+    using Airports.Models;
+    using System.Linq;
+
     public class FlightsRepository : Repository<Flight>
     {
          public FlightsRepository(IAirportsDbContextSqlServer dbContext)

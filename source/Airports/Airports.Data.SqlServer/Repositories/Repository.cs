@@ -1,6 +1,5 @@
 ﻿namespace Airports.Data.SqlServer.Repositories
 {
-    using Airports.Data;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;

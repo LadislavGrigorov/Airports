@@ -73,10 +73,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>AirportsDbSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Exporters\JsonFileExporter.cs" />
-    <Compile Include="Exporters\PdfFileExporter.cs" />
-    <Compile Include="Exporters\ExportHelper.cs" />
-    <Compile Include="Exporters\XmlFileExporter.cs" />
+    <Compile Include="Exporters\JsonExporter.cs" />
+    <Compile Include="Exporters\PdfExporter.cs" />
+    <Compile Include="Exporters\XmlExporter.cs" />
     <Compile Include="Importers\ExcelDataImporter.cs" />
     <Compile Include="Importers\XmlDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
