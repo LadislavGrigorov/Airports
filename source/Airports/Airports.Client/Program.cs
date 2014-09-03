@@ -1,6 +1,8 @@
 ﻿namespace Airports.Client
 {
     using Airports.Data.MongoDb;
+    using Airports.Data.MySql.Exporters;
+    using Airports.Data.MySql.Importers;
     using Airports.Data.SqlServer;
     using Airports.Data.SqlServer.Exporters;
     using Airports.Data.SqlServer.Importers;
@@ -31,10 +33,10 @@
             ExtractZipAndImportDataFromExcelAndMongoDb(airportsData, mongoData);
             
             ////Task 2: Generate PDF Reports
-            //GeneratePdfFlightsReport(airportsData);
+            GeneratePdfFlightsReport(airportsData);
 
             //Tast 3: Generate report in XML format 
-            //GenerateXmlFlightsReport(airportsData);
+            GenerateXmlFlightsReport(airportsData);
 
             //// Task 4: a) Genetare JSON reports from SQL Server to file system.
             ////         b) Import reports from file system (.json files) to MySQL.
@@ -87,7 +89,9 @@
         {
             var jsonExporter = new JsonFileExporter();
             jsonExporter.GenerateReports(airportsData, JsonReportsDestionationPath);
-            //MySqlReportsImporter.ImportJsonReport(JsonReportsDestionationPath);
+
+            var mySqlImporter = new MySqlReportsImporter();
+            mySqlImporter.ImportJsonReport(JsonReportsDestionationPath);
         }
 
         private static void ImportFlightsDataFromXmlAndLoadToMongoDb(IAirportsDataSqlServer airportsData, IAirportsDataMongoDb mongoData)

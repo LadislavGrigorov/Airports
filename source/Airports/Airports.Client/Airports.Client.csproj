@@ -66,6 +66,10 @@
       <Project>{19b70d04-2fce-4189-9877-8854e5feb55f}</Project>
       <Name>Airports.Data.MongoDb</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Airports.Data.MySql\Airports.Data.MySql.csproj">
+      <Project>{09b8f9b1-8324-4b00-87cc-9e3ef3ac9a58}</Project>
+      <Name>Airports.Data.MySql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Airports.Data.SqlServer\Airports.Data.SqlServer.csproj">
       <Project>{5e60cc95-05a6-4236-b204-cb157d36de57}</Project>
       <Name>Airports.Data.SqlServer</Name>

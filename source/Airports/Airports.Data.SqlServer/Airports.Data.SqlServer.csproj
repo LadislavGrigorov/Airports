@@ -54,9 +54,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SpreadsheetLight">
-      <HintPath>..\packages\SpreadsheetLight.3.4.4\lib\SpreadsheetLight.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -76,13 +73,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>AirportsDbSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Exporters\ExcelReportExporter.cs" />
     <Compile Include="Exporters\JsonFileExporter.cs" />
     <Compile Include="Exporters\PdfFileExporter.cs" />
     <Compile Include="Exporters\ExportHelper.cs" />
     <Compile Include="Exporters\XmlFileExporter.cs" />
     <Compile Include="Importers\ExcelDataImporter.cs" />
-    <Compile Include="Importers\MySqlReportsImporter.cs" />
     <Compile Include="Importers\XmlDataImporter.cs" />
     <Compile Include="Importers\ZipExtractor.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -104,10 +99,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Airports.Models.MySql\Airports.Models.MySql.csproj">
-      <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
-      <Name>Airports.Models.MySql</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Airports.Models\Airports.Models.csproj">
       <Project>{36632911-57fa-4320-b7e1-8e4ee3d12a52}</Project>
       <Name>Airports.Models</Name>

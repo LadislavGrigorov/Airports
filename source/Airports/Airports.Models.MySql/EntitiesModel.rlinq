@@ -1,52 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="EntitiesModel" namespace="Airports.Models.MySql" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
-  <orm:orm name="EntitiesModel" backend="mysql" xmlns:orm="http://tempuri.org/ORM">
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="AirportsDbContextMySql" namespace="Airports.Models.MySql" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="AirportsDbContextMySql" backend="mysql" xmlns:orm="http://tempuri.org/ORM">
     <orm:namespace name="Airports.Models.MySql" default="true">
-      <orm:class name="Jsonreport" uniqueId="ab636430-a79b-480b-ab3a-170901cd1bde">
-        <orm:table name="jsonreports" />
+      <orm:class name="Airlinereport" uniqueId="6ceeb777-0e25-4d42-9f59-9e2f72fd59c9">
+        <orm:table name="airlinereports" />
         <orm:identity>
-          <orm:key-generator name="autoinc">
-            <orm:key-generator-member property-name="ReportId" />
-          </orm:key-generator>
           <orm:single-field field-name="_reportId" />
         </orm:identity>
         <orm:concurrency strategy="changed" />
-        <orm:field name="_reportId" property="ReportId" behavior="readwrite" uniqueId="b4a4fb27-356a-415e-800c-1d6caadf5c41" type="System.Int32">
-          <orm:column name="ReportId" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:field name="_reportId" property="ReportId" behavior="readwrite" uniqueId="58dc2417-1405-499e-bbdf-8fadd266e47e" type="System.Int32">
+          <orm:column name="ReportId" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
-        <orm:field name="_flightId" property="FlightId" behavior="readwrite" uniqueId="27531192-83a0-49bf-a664-8cecf7ddb4ec" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column name="FlightId" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:field name="_airlineName" property="AirlineName" behavior="readwrite" uniqueId="dc6f30d2-e67e-48ca-bb7c-43ce39db111f" type="System.String">
+          <orm:column name="AirlineName" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
         </orm:field>
-        <orm:field name="_departureAirportId" property="DepartureAirportId" behavior="readwrite" uniqueId="110a7ec3-a742-4417-96f6-58763e6880e7" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column name="DepartureAirportId" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:field name="_airlineId" property="AirlineId" behavior="readwrite" uniqueId="b3e38e72-98c5-4f07-acc6-ca9ef830ecd8" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="AirlineId" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
-        <orm:field name="_arrivalAirportId" property="ArrivalAirportId" behavior="readwrite" uniqueId="684b66ed-3f75-4dfe-9e54-0bba2136f230" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column name="ArrivalAirportId" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:field name="_totalFlightsCount" property="TotalFlightsCount" behavior="readwrite" uniqueId="243d9444-8c0a-4ef6-be69-dae484fa3824" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="TotalFlightsCount" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
-        <orm:field name="_flightCode" property="FlightCode" behavior="readwrite" uniqueId="0cf60e24-8bbf-4787-b5cc-f3410385006b" type="System.String">
-          <orm:column name="FlightCode" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:field name="_averageFlightsCount" property="AverageFlightsCount" behavior="readwrite" uniqueId="cb3719c1-21aa-4745-b05d-46a9920cdb5a" type="System.Nullable`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="AverageFlightsCount" sql-type="float" nullable="true" length="0" scale="0" ado-type="Real" />
         </orm:field>
-        <orm:field name="_flightDate" property="FlightDate" behavior="readwrite" uniqueId="0f2a815e-a74c-47fe-bd9f-0eedfa52ab51" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column name="FlightDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:field name="_totalFlightsDuration" property="TotalFlightsDuration" behavior="readwrite" uniqueId="9b0bbb4c-f88d-4f00-b026-9d6a8582abf5" type="System.Nullable`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="TotalFlightsDuration" sql-type="float" nullable="true" length="0" scale="0" ado-type="Real" />
         </orm:field>
-        <orm:field name="_durationHours" property="DurationHours" behavior="readwrite" uniqueId="2a8534c4-11d7-48e0-8ae7-fc6ed911d2cd" type="System.Nullable`1[[System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column name="DurationHours" sql-type="float" nullable="true" length="0" scale="0" ado-type="Real" />
+        <orm:field name="_startDate" property="StartDate" behavior="readwrite" uniqueId="897bd8a5-90ae-4ab6-a00d-7ce35efd30c5" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="StartDate" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
         </orm:field>
-        <orm:field name="_airlineId" property="AirlineId" behavior="readwrite" uniqueId="9c350655-92f6-42a7-8e70-e86b7d99c22b" type="System.String">
-          <orm:column name="AirlineId" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:field name="_endDate" property="EndDate" behavior="readwrite" uniqueId="fa94f3b0-d209-49c5-81cb-303b4c81700e" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="EndDate" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
         </orm:field>
       </orm:class>
     </orm:namespace>
     <orm:schema schema="">
-      <orm:table name="jsonreports">
-        <orm:column name="ReportId" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
-        <orm:column name="FlightId" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
-        <orm:column name="DepartureAirportId" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
-        <orm:column name="ArrivalAirportId" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
-        <orm:column name="FlightCode" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
-        <orm:column name="FlightDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
-        <orm:column name="DurationHours" sql-type="float" nullable="true" length="0" scale="0" ado-type="Real" />
-        <orm:column name="AirlineId" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+      <orm:table name="airlinereports">
+        <orm:column name="ReportId" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="AirlineName" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="AirlineId" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="TotalFlightsCount" sql-type="integer" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="AverageFlightsCount" sql-type="float" nullable="true" length="0" scale="0" ado-type="Real" />
+        <orm:column name="TotalFlightsDuration" sql-type="float" nullable="true" length="0" scale="0" ado-type="Real" />
+        <orm:column name="StartDate" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
+        <orm:column name="EndDate" sql-type="date" nullable="true" length="0" scale="0" ado-type="Date" />
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -55,8 +52,8 @@
     </orm:relational-naming-settings>
   </orm:orm>
   <ModelSettings xmlns="">
-    <AppConfigConnectionPropertyName>MySqlConnection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>Server=localhost;Database=Reports;Uid=root;Pwd=daemon;</AppConfigConnectionString>
+    <AppConfigConnectionPropertyName>AirportsMySqlConnectionString</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>server=localhost;database=airports;uid=root;pwd=daemon</AppConfigConnectionString>
     <NamingSettings>
       <ClassRules>
         <CaseMode>PascalCase</CaseMode>
@@ -83,21 +80,21 @@
     </BackendConfigurationSettings>
   </ModelSettings>
   <Types>
-    <DomainClass Id="ab636430-a79b-480b-ab3a-170901cd1bde" name="Jsonreport" namespace="Airports.Models.MySql" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ReportId">
-      <Property Id="b4a4fb27-356a-415e-800c-1d6caadf5c41" name="ReportId" type="Int32" label="ReportId : Int32" kind="Persistent" identity="true" fieldName="_reportId" />
-      <Property Id="9c350655-92f6-42a7-8e70-e86b7d99c22b" name="AirlineId" label="AirlineId : String" kind="Persistent" fieldName="_airlineId" />
-      <Property Id="684b66ed-3f75-4dfe-9e54-0bba2136f230" name="ArrivalAirportId" type="Int32" label="ArrivalAirportId : Int32" nullable="true" kind="Persistent" fieldName="_arrivalAirportId" />
-      <Property Id="110a7ec3-a742-4417-96f6-58763e6880e7" name="DepartureAirportId" type="Int32" label="DepartureAirportId : Int32" nullable="true" kind="Persistent" fieldName="_departureAirportId" />
-      <Property Id="2a8534c4-11d7-48e0-8ae7-fc6ed911d2cd" name="DurationHours" type="Single" label="DurationHours : Single" nullable="true" kind="Persistent" fieldName="_durationHours" />
-      <Property Id="0cf60e24-8bbf-4787-b5cc-f3410385006b" name="FlightCode" label="FlightCode : String" kind="Persistent" fieldName="_flightCode" />
-      <Property Id="0f2a815e-a74c-47fe-bd9f-0eedfa52ab51" name="FlightDate" type="DateTime" label="FlightDate : DateTime" nullable="true" kind="Persistent" fieldName="_flightDate" />
-      <Property Id="27531192-83a0-49bf-a664-8cecf7ddb4ec" name="FlightId" type="Int32" label="FlightId : Int32" nullable="true" kind="Persistent" fieldName="_flightId" />
+    <DomainClass Id="6ceeb777-0e25-4d42-9f59-9e2f72fd59c9" name="Airlinereport" namespace="Airports.Models.MySql" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="58dc2417-1405-499e-bbdf-8fadd266e47e" name="ReportId" type="Int32" label="ReportId : Int32" kind="Persistent" identity="true" fieldName="_reportId" />
+      <Property Id="b3e38e72-98c5-4f07-acc6-ca9ef830ecd8" name="AirlineId" type="Int32" label="AirlineId : Int32" nullable="true" kind="Persistent" fieldName="_airlineId" />
+      <Property Id="dc6f30d2-e67e-48ca-bb7c-43ce39db111f" name="AirlineName" label="AirlineName : String" kind="Persistent" fieldName="_airlineName" />
+      <Property Id="cb3719c1-21aa-4745-b05d-46a9920cdb5a" name="AverageFlightsCount" type="Single" label="AverageFlightsCount : Single" nullable="true" kind="Persistent" fieldName="_averageFlightsCount" />
+      <Property Id="fa94f3b0-d209-49c5-81cb-303b4c81700e" name="EndDate" type="DateTime" label="EndDate : DateTime" nullable="true" kind="Persistent" fieldName="_endDate" />
+      <Property Id="897bd8a5-90ae-4ab6-a00d-7ce35efd30c5" name="StartDate" type="DateTime" label="StartDate : DateTime" nullable="true" kind="Persistent" fieldName="_startDate" />
+      <Property Id="243d9444-8c0a-4ef6-be69-dae484fa3824" name="TotalFlightsCount" type="Int32" label="TotalFlightsCount : Int32" nullable="true" kind="Persistent" fieldName="_totalFlightsCount" />
+      <Property Id="9b0bbb4c-f88d-4f00-b026-9d6a8582abf5" name="TotalFlightsDuration" type="Single" label="TotalFlightsDuration : Single" nullable="true" kind="Persistent" fieldName="_totalFlightsDuration" />
     </DomainClass>
   </Types>
   <domainContext>
-    <domainModelHasDomainContext Id="4d3fcdef-f10f-49ed-aa36-7c14029a4493">
-      <domainContainer name="EntitiesModel" namespace="Airports.Models.MySql" showPropertiesCompartment="true">
-        <entitySetProperty name="Jsonreports" namespace="Airports.Models.MySql" type="Jsonreport" label="Jsonreports : IQueryable&lt;Airports.Models.MySql.Jsonreport&gt;" />
+    <domainModelHasDomainContext Id="3ed69b93-dd3f-4c4d-9e05-eeb8ca0e7d73">
+      <domainContainer name="AirportsDbContextMySql" namespace="Airports.Models.MySql" showPropertiesCompartment="true">
+        <entitySetProperty name="Airlinereports" namespace="Airports.Models.MySql" type="Airlinereport" label="Airlinereports : IQueryable&lt;Airports.Models.MySql.Airlinereport&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

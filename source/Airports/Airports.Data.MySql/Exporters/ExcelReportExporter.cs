@@ -1,10 +1,11 @@
-﻿namespace Airports.Data.SqlServer.Exporters
+﻿namespace Airports.Data.MySql.Exporters
 {
-    using Airports.Models.MySql;
-    using SpreadsheetLight;
     using System;
     using System.IO;
     using System.Linq;
+
+    using Airports.Models.MySql;
+    using SpreadsheetLight;
 
     public static class ExcelReportExporter
     {
@@ -16,16 +17,16 @@
 
             SLDocument excelFile = new SLDocument();
 
-            using (EntitiesModel dbContext = new EntitiesModel())
+            using (AirportsDbContextMySql dbContext = new AirportsDbContextMySql())
             {
-                var allData = dbContext.Jsonreports.ToList();
+                var allData = dbContext.Airlinereports.ToList();
 
                 int rowCounter = 1;
                 foreach (var row in allData)
                 {
-                    excelFile.SetCellValue("A" + rowCounter, row.ReportId);
-                    excelFile.SetCellValue("B" + rowCounter, row.FlightCode);
-                    excelFile.SetCellValue("C" + rowCounter, row.FlightDate.ToString());
+                    excelFile.SetCellValue("A" + rowCounter, row.AirlineId.ToString());
+                    excelFile.SetCellValue("B" + rowCounter, row.AirlineName);
+                    excelFile.SetCellValue("C" + rowCounter, row.AverageFlightsCount.ToString());
                     rowCounter++;
                 }
             }

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDiagrams>
-  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="EntitiesModel" isDefault="true">
-    <DomainModelMoniker name="/EntitiesModel" />
+  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="AirportsDbContextMySql" isDefault="true">
+    <DomainModelMoniker name="/AirportsDbContextMySql" />
     <nestedChildShapes>
-      <classShape Id="22ec7984-096a-4843-a3f4-03eb9f11e04c" absoluteBounds="0.75, 0.75, 1.5, 2.9165804036458329">
-        <DomainClassMoniker name="/EntitiesModel/Jsonreport" />
+      <classShape Id="a9f22941-4004-43f7-bb07-be64bc5c9a18" absoluteBounds="0.75, 0.75, 1.5, 2.9165804036458329">
+        <DomainClassMoniker name="/AirportsDbContextMySql/Airlinereport" />
         <nestedChildShapes>
-          <elementListCompartment Id="9e3be462-ff3d-417d-83f8-d78c40a34804" absoluteBounds="0.765, 1.2599999999999998, 1.4700000000000002, 1.7878011067708333" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-          <elementListCompartment Id="71b9eed4-fa83-4eb8-8449-44e42b71a65f" absoluteBounds="0.765, 3.0578011067708331, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
-          <elementListCompartment Id="1ecf521f-feb3-4e79-b461-be5daee6b88b" absoluteBounds="0.765, 3.3171907552083333, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="9e6a041d-6fc9-4be8-b7d6-a70fe77fe845" absoluteBounds="0.765, 1.2599999999999998, 1.4700000000000002, 1.7878011067708333" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="049a5f9d-3384-4de1-983c-f7dcc0de390a" absoluteBounds="0.765, 3.0578011067708331, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="e7838055-532a-41a5-93c1-fb045ed66ea9" absoluteBounds="0.765, 3.3171907552083333, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
         </nestedChildShapes>
       </classShape>
     </nestedChildShapes>

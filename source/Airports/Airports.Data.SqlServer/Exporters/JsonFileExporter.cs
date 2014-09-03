@@ -18,8 +18,8 @@ using System;
             DateTime? startDate = null,
             DateTime? endDate = null)
         {
-            startDate = startDate ?? DefaultStartDate;
-            endDate = endDate ?? DefaultEndDate;
+            startDate = startDate ?? new DateTime(1990, 1, 1);
+            endDate = endDate ?? new DateTime(2015, 1, 1);
 
             CreateDirectoryIfNotExists(reportsFolderPath);
 
@@ -35,11 +35,11 @@ using System;
                 .Select(a =>
                     new
                     {
-                        a.AirlineId,
-                        a.Name,
-                        FlightsCount = a.Flights.Count(),
-                        TotalDuration = a.Flights.Sum(f => f.DurationHours),
-                        AverageDuration = a.Flights.Average(f => f.DurationHours),
+                        AirlineId = a.AirlineId,
+                        AirlineName = a.Name,
+                        TotalFlightsCount = a.Flights.Count(),
+                        AverageFlightsCount = a.Flights.Average(f => f.DurationHours), //AverageFligtsDuration
+                        TotalFlightsDuration = a.Flights.Sum(f => f.DurationHours),                        
                         StartDate = startDate,
                         EndDate = endDate
                     })

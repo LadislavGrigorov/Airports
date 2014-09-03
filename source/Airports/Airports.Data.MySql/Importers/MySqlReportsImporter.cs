@@ -1,23 +1,23 @@
-﻿namespace Airports.Data.SqlServer.Importers
+﻿namespace Airports.Data.MySql.Importers
 {
     using System;    
     using System.IO;
     using Airports.Models.MySql;
     using Newtonsoft.Json;
 
-    public static class MySqlReportsImporter
+    public class MySqlReportsImporter
     {
-        public static void ImportJsonReport(string path)
+        public void ImportJsonReport(string path)
         {
             Console.WriteLine("Loading JSON reports into the MySql database");
             string[] files = GetReportsFileNames(path);
 
-            using (EntitiesModel dbContext = new EntitiesModel())
+            using (AirportsDbContextMySql dbContext = new AirportsDbContextMySql())
             {
                 foreach (var file in files)
                 {
                     string fileContent = File.ReadAllText(file);
-                    Jsonreport report = JsonConvert.DeserializeObject<Jsonreport>(fileContent);
+                    Airlinereport report = JsonConvert.DeserializeObject<Airlinereport>(fileContent);
                     dbContext.Add(report);
                 }
 

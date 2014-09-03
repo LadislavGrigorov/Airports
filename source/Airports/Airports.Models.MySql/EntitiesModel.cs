@@ -22,39 +22,39 @@ using Airports.Models.MySql;
 
 namespace Airports.Models.MySql	
 {
-	public partial class EntitiesModel : OpenAccessContext, IEntitiesModelUnitOfWork
+	public partial class AirportsDbContextMySql : OpenAccessContext, IAirportsDbContextMySqlUnitOfWork
 	{
-		private static string connectionStringName = @"MySqlConnection";
+		private static string connectionStringName = @"AirportsMySqlConnectionString";
 			
 		private static BackendConfiguration backend = GetBackendConfiguration();
 				
 		private static MetadataSource metadataSource = XmlMetadataSource.FromAssemblyResource("EntitiesModel.rlinq");
 		
-		public EntitiesModel()
+		public AirportsDbContextMySql()
 			:base(connectionStringName, backend, metadataSource)
 		{ }
 		
-		public EntitiesModel(string connection)
+		public AirportsDbContextMySql(string connection)
 			:base(connection, backend, metadataSource)
 		{ }
 		
-		public EntitiesModel(BackendConfiguration backendConfiguration)
+		public AirportsDbContextMySql(BackendConfiguration backendConfiguration)
 			:base(connectionStringName, backendConfiguration, metadataSource)
 		{ }
 			
-		public EntitiesModel(string connection, MetadataSource metadataSource)
+		public AirportsDbContextMySql(string connection, MetadataSource metadataSource)
 			:base(connection, backend, metadataSource)
 		{ }
 		
-		public EntitiesModel(string connection, BackendConfiguration backendConfiguration, MetadataSource metadataSource)
+		public AirportsDbContextMySql(string connection, BackendConfiguration backendConfiguration, MetadataSource metadataSource)
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
-		public IQueryable<Jsonreport> Jsonreports 
+		public IQueryable<Airlinereport> Airlinereports 
 		{
 			get
 			{
-				return this.GetAll<Jsonreport>();
+				return this.GetAll<Airlinereport>();
 			}
 		}
 		
@@ -70,16 +70,16 @@ namespace Airports.Models.MySql
 		}
 		
 		/// <summary>
-		/// Allows you to customize the BackendConfiguration of EntitiesModel.
+		/// Allows you to customize the BackendConfiguration of AirportsDbContextMySql.
 		/// </summary>
-		/// <param name="config">The BackendConfiguration of EntitiesModel.</param>
+		/// <param name="config">The BackendConfiguration of AirportsDbContextMySql.</param>
 		static partial void CustomizeBackendConfiguration(ref BackendConfiguration config);
 		
 	}
 	
-	public interface IEntitiesModelUnitOfWork : IUnitOfWork
+	public interface IAirportsDbContextMySqlUnitOfWork : IUnitOfWork
 	{
-		IQueryable<Jsonreport> Jsonreports
+		IQueryable<Airlinereport> Airlinereports
 		{
 			get;
 		}

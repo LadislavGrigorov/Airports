@@ -21,7 +21,7 @@ using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 
 namespace Airports.Models.MySql	
 {
-	public partial class Jsonreport
+	public partial class Airlinereport
 	{
 		private int _reportId;
 		public virtual int ReportId
@@ -36,86 +36,21 @@ namespace Airports.Models.MySql
 			}
 		}
 		
-		private int? _flightId;
-		public virtual int? FlightId
+		private string _airlineName;
+		public virtual string AirlineName
 		{
 			get
 			{
-				return this._flightId;
+				return this._airlineName;
 			}
 			set
 			{
-				this._flightId = value;
+				this._airlineName = value;
 			}
 		}
 		
-		private int? _departureAirportId;
-		public virtual int? DepartureAirportId
-		{
-			get
-			{
-				return this._departureAirportId;
-			}
-			set
-			{
-				this._departureAirportId = value;
-			}
-		}
-		
-		private int? _arrivalAirportId;
-		public virtual int? ArrivalAirportId
-		{
-			get
-			{
-				return this._arrivalAirportId;
-			}
-			set
-			{
-				this._arrivalAirportId = value;
-			}
-		}
-		
-		private string _flightCode;
-		public virtual string FlightCode
-		{
-			get
-			{
-				return this._flightCode;
-			}
-			set
-			{
-				this._flightCode = value;
-			}
-		}
-		
-		private DateTime? _flightDate;
-		public virtual DateTime? FlightDate
-		{
-			get
-			{
-				return this._flightDate;
-			}
-			set
-			{
-				this._flightDate = value;
-			}
-		}
-		
-		private float? _durationHours;
-		public virtual float? DurationHours
-		{
-			get
-			{
-				return this._durationHours;
-			}
-			set
-			{
-				this._durationHours = value;
-			}
-		}
-		
-		private string _airlineId;
-		public virtual string AirlineId
+		private int? _airlineId;
+		public virtual int? AirlineId
 		{
 			get
 			{
@@ -124,6 +59,71 @@ namespace Airports.Models.MySql
 			set
 			{
 				this._airlineId = value;
+			}
+		}
+		
+		private int? _totalFlightsCount;
+		public virtual int? TotalFlightsCount
+		{
+			get
+			{
+				return this._totalFlightsCount;
+			}
+			set
+			{
+				this._totalFlightsCount = value;
+			}
+		}
+		
+		private float? _averageFlightsCount;
+		public virtual float? AverageFlightsCount
+		{
+			get
+			{
+				return this._averageFlightsCount;
+			}
+			set
+			{
+				this._averageFlightsCount = value;
+			}
+		}
+		
+		private float? _totalFlightsDuration;
+		public virtual float? TotalFlightsDuration
+		{
+			get
+			{
+				return this._totalFlightsDuration;
+			}
+			set
+			{
+				this._totalFlightsDuration = value;
+			}
+		}
+		
+		private DateTime? _startDate;
+		public virtual DateTime? StartDate
+		{
+			get
+			{
+				return this._startDate;
+			}
+			set
+			{
+				this._startDate = value;
+			}
+		}
+		
+		private DateTime? _endDate;
+		public virtual DateTime? EndDate
+		{
+			get
+			{
+				return this._endDate;
+			}
+			set
+			{
+				this._endDate = value;
 			}
 		}
 		
