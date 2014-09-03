@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airports.Data.MySql", "Airp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airports.Models.MySql", "Airports.Models.MySql\Airports.Models.MySql.csproj", "{C50145E6-A244-4F1F-B41F-90D1925B4A00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airports.Models.SQLite", "Airports.Models.SQLite\Airports.Models.SQLite.csproj", "{8AE271AF-2308-411C-8BD3-7FC01A720EF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airports.Data.SQLite", "Airports.Data.SQLite\Airports.Data.SQLite.csproj", "{2F3D92F7-C1E5-48EC-9345-A09119171DF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE271AF-2308-411C-8BD3-7FC01A720EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE271AF-2308-411C-8BD3-7FC01A720EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE271AF-2308-411C-8BD3-7FC01A720EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE271AF-2308-411C-8BD3-7FC01A720EF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F3D92F7-C1E5-48EC-9345-A09119171DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F3D92F7-C1E5-48EC-9345-A09119171DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F3D92F7-C1E5-48EC-9345-A09119171DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F3D92F7-C1E5-48EC-9345-A09119171DF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
