@@ -15,10 +15,22 @@
 
             var airlines = database.Airlines.GetAll()
                 .Include("Flights")
-                .Include("Flight.DepartureAirport")
-                .Include("Flight.ArrivalAirport")
+                .Select(airline => new
+                {
+                    Name = airline.Name,
+                    Flights = airline.Flights.Select(flight =>
+                    new
+                    {
+                        FlightCode = flight.FlightCode,
+                        DepartureAirport = flight.DepartureAirport,
+                        ArrivalAirport = flight.ArrivalAirport,
+                        DurationHours = flight.DurationHours
+                    })
+
+                })
                 .ToList();
-                
+
+
             XDocument xdoc = new XDocument(new XElement("airlines",
                 from airline in airlines
                 select new XElement("airline",
