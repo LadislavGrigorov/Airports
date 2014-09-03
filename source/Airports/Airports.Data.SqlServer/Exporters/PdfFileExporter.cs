@@ -1,5 +1,6 @@
 ﻿namespace Airports.SqlServer.Data.Exporters
 {
+    using System;
     using System.Data.Entity;
     using System.IO;
     using System.Linq;
@@ -16,6 +17,8 @@
 
         public void GenerateFlightReport(string filePath, string fileName, IAirportsDataSqlServer airportsData)
         {
+            fileName = AddFileNameSuffix(fileName);
+
             this.CreateDirectoryIfNotExists(filePath);
             var document = new Document(PageSize.A4, 50, 50, 25, 25);
             var output = new FileStream(filePath + fileName, FileMode.Create, FileAccess.Write);
@@ -29,6 +32,14 @@
             document.Open();
             document.Add(table);
             document.Close();
+        }
+
+        private static string AddFileNameSuffix(string fileName)
+        {
+            DateTime now = DateTime.Now;
+            string fileNameSuffix = string.Format("-{0}.{1}.{2}-{3}.{4}.{5}.pdf", now.Day, now.Month, now.Year, now.Hour, now.Minute, now.Second);
+            fileName = fileName + fileNameSuffix;
+            return fileName;
         }
 
         private void FillTableData(PdfPTable table, IAirportsDataSqlServer airportsData)

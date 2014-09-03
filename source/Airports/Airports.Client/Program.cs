@@ -17,7 +17,7 @@
         private const string JsonReportsDestionationPath = @"..\..\..\..\exports\Json-Reports\";
         private const string ExcelReportsDestinationPath = @"..\..\..\..\exports\Excel-Reports\";
         private const string PdfReportsFolderPath = @"..\..\..\..\exports\PDF-Reports\";
-        private const string PdfReportsFileName = @"flight-report.pdf";
+        private const string PdfReportsFileName = @"flight-report";
         private const string XmlReportsFolderPath = @"..\..\..\..\exports\Xml-Reports\";
 
         static void Main()
@@ -30,8 +30,8 @@
             // * b) Import data from MongoDb to SQL Server. */
             ////ExtractZipAndImportDataFromExcelAndMongoDb(airportsData, mongoData);
             
-            ////Task 2: Generate PDF Reports
-            //GeneratePdfFlightsReport(airportsData);
+            //Task 2: Generate PDF Reports
+            GeneratePdfFlightsReport(airportsData);
 
             //Tast 3: Generate report in XML format 
             GenerateXmlFlightsReport(airportsData);
