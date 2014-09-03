@@ -10,6 +10,7 @@
     using Airports.SqlServer.Data.Exporters;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     class Program
     {
@@ -27,30 +28,33 @@
             IAirportsDataSqlServer airportsData = new AirportsDataSqlServer();
             IAirportsDataMongoDb mongoData = new AirportsDataMongoDb();
             
-            ///*Task 1:
-            // * a) Extract *.xls and *.xlsx files from a zip archive; read and load the data into SQL Server.
-            // * b) Import data from MongoDb to SQL Server. */
+            /*Task 1:
+             * a) Extract *.xls and *.xlsx files from a zip archive; read and load the data into SQL Server.
+             * b) Import data from MongoDb to SQL Server. */
             ExtractZipAndImportDataFromExcelAndMongoDb(airportsData, mongoData);
             
-            ////Task 2: Generate PDF Reports
+            //Task 2: Generate PDF Reports
             GeneratePdfFlightsReport(airportsData);
 
             //Tast 3: Generate report in XML format 
             GenerateXmlFlightsReport(airportsData);
 
-            //// Task 4: a) Genetare JSON reports from SQL Server to file system.
-            ////         b) Import reports from file system (.json files) to MySQL.
+            // Task 4: a) Genetare JSON reports from SQL Server to file system.
+            //         b) Import reports from file system (.json files) to MySQL.
             GenerateJsonFlightsReportsAndLoadToMySql(airportsData);
 
-            ///* Task 5: Load Data from XML and save it in SQL Server and MongoDb */
+            /* Task 5: Load Data from XML and save it in SQL Server and MongoDb */
             ImportFlightsDataFromXmlAndLoadToMongoDb(airportsData, mongoData);
 
-            ///* Task 6: Export merged report from MySql and SQLite to Excel 2007 file */
-            ExcelExporter.GenerateCompositeReport(ExcelReportsDestinationPath);
-            //ExcelExporter.Test();
+            /* Task 6: Export merged report from MySql and SQLite to Excel 2007 file */
+            ComposeDataFromSQLiteAndMySqlAndExportToExcel();
+
+            Console.WriteLine("Done.");
         }
 
-        private static void ExtractZipAndImportDataFromExcelAndMongoDb(IAirportsDataSqlServer airportsData, IAirportsDataMongoDb mongoData)
+        private static void ExtractZipAndImportDataFromExcelAndMongoDb(
+            IAirportsDataSqlServer airportsData, 
+            IAirportsDataMongoDb mongoData)
         {
             Console.WriteLine("Unpacking zip archive...");
             var zipExtractor = new ZipExtractor();
@@ -69,21 +73,36 @@
             }
 
             airportsData.SaveChanges();
+
+            var countriesFromMongo = mongoData.Countries.ToList();
+            
+            foreach (var country in countriesFromMongo)
+            {
+                airportsData.Countries.Add(country);
+            }
+
+            var citiesFromMongo = mongoData.Cities.ToList();
+
+            foreach (var city in citiesFromMongo)
+            {
+                airportsData.Cities.Add(city);
+            }
+
+            airportsData.SaveChanges();
         }
 
         private static void GeneratePdfFlightsReport(IAirportsDataSqlServer airportsData)
         {
             Console.WriteLine("Exporting PDF flight report...");
+
             var pdfExporter = new PdfFileExporter();
             pdfExporter.GenerateAggregatedAirlineReports(PdfReportsFolderPath, PdfReportsFileName, airportsData);
-            Console.WriteLine("PDF flights report done!");
         }
 
         private static void GenerateXmlFlightsReport(IAirportsDataSqlServer airportsData)
         {
             Console.WriteLine("Exporting XML airlines report...");
             XmlFileExporter.GenerateAirlinesReport(XmlReportsFolderPath, airportsData);
-            Console.WriteLine("XML airlines report done!");
         }
 
         private static void GenerateJsonFlightsReportsAndLoadToMySql(IAirportsDataSqlServer airportsData)
@@ -92,7 +111,7 @@
             jsonExporter.GenerateReportsForGivenPeriod(airportsData, JsonReportsDestionationPath);
 
             var mySqlImporter = new JsonDataImporter();
-            mySqlImporter.ImportAirlineReports(JsonReportsDestionationPath);
+            mySqlImporter.ImportAirlineReportsFromDirectory(JsonReportsDestionationPath);
         }
 
         private static void ImportFlightsDataFromXmlAndLoadToMongoDb(IAirportsDataSqlServer airportsData, IAirportsDataMongoDb mongoData)
@@ -101,8 +120,8 @@
 
             XmlDataImporter xmlDataImporter = new XmlDataImporter();
 
-            ICollection<Flight> importedFlightsFromXml = xmlDataImporter
-                .ImportFlightsDataFromFile(SampleFlightsDataXmlFilePath);
+            ICollection<Flight> importedFlightsFromXml = 
+                xmlDataImporter.ImportFlightsDataFromFile(SampleFlightsDataXmlFilePath);
 
             Console.WriteLine("Loading imported flights to SQL Server and MongoDb...");
 
@@ -113,6 +132,12 @@
             }
 
             airportsData.SaveChanges();
+        }
+
+        private static void ComposeDataFromSQLiteAndMySqlAndExportToExcel()
+        {
+            ExcelExporter excelExporter = new ExcelExporter();
+            excelExporter.GenerateCompositeAirlinesReport(ExcelReportsDestinationPath);
         }
     }
 }

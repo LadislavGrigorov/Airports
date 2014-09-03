@@ -3,14 +3,13 @@
     using System;
     using System.IO;
     using System.Linq;
-
     using Airports.Data.SQLite;
     using Airports.Models.MySql;
     using SpreadsheetLight;
-
-    public static class ExcelExporter
+    
+    public class ExcelExporter
     {
-        public static void GenerateCompositeReport(string path)
+        public void GenerateCompositeAirlinesReport(string path)
         {
             Console.WriteLine("Generating merged report from SQLite and MySql...");
 
@@ -20,6 +19,7 @@
             }
 
             SLDocument excelFile = new SLDocument();
+
             using (AirportsDbContextSQLite sqliteDbContext = new AirportsDbContextSQLite())
             {                
                 using (AirportsDbContextMySql mysqlDbContext = new AirportsDbContextMySql())
@@ -44,7 +44,7 @@
                     excelFile.SetCellValue("C1", "Average Flights Duration");
                     excelFile.SetCellValue("D1", "Total Flights Duration"); 
                     excelFile.SetCellValue("E1", "From Date");
-                    excelFile.SetCellValue("F2", "To Date"); 
+                    excelFile.SetCellValue("F1", "To Date"); 
                     excelFile.SetCellValue("G1", "Company Website");
                     excelFile.SetCellValue("H1", "Foundation Year");
 
@@ -63,9 +63,12 @@
                     }
                 }
             }
-            
-            excelFile.SaveAs(path + "Reports.xlsx");
-            Console.WriteLine("Done!");
+
+            DateTime currentDate = DateTime.Now;
+            string fileNameSuffix = string.Format("-{0}.{1}.{2}-{3}.{4}.{5}.pdf",
+                currentDate.Day, currentDate.Month, currentDate.Year, currentDate.Hour, currentDate.Minute, currentDate.Second);
+
+            excelFile.SaveAs(string.Format("{0}AirlineRepors_{1}.xlsx", path, fileNameSuffix));
         }
     }
 }

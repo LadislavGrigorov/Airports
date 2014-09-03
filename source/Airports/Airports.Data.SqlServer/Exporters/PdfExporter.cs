@@ -94,9 +94,9 @@
 
         private static string AddUniqueFilenameSuffix(string fileName)
         {
-            DateTime now = DateTime.Now;
+            DateTime currentDate = DateTime.Now;
             string fileNameSuffix = string.Format("-{0}.{1}.{2}-{3}.{4}.{5}.pdf",
-                now.Day, now.Month, now.Year, now.Hour, now.Minute, now.Second);
+                currentDate.Day, currentDate.Month, currentDate.Year, currentDate.Hour, currentDate.Minute, currentDate.Second);
 
             fileName = fileName + fileNameSuffix;
             return fileName;

@@ -1,11 +1,11 @@
 ﻿namespace Airports.Data.MongoDb
 {
-    using Airports.Models;
-    using MongoDB.Driver.Linq;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using Airports.Models;
+    using MongoDB.Driver.Linq;
+    
     public class AirportsDataMongoDb : IAirportsDataMongoDb
     {
         private const string AirportsCollectionName = "Airports";
@@ -14,19 +14,18 @@
         private const string CitiesCollectionName = "Cities";
         private const string CountriesCollectionName = "Countries";
 
-        private readonly IDictionary<Type, string> collectionNames = new Dictionary<Type, string>() 
+        private readonly IDictionary<Type, string> collectionNames = new Dictionary<Type, string>()
         {
-            {typeof(Airport), AirportsCollectionName},
-            {typeof(Airline), AirlinesCollectionName},
-            {typeof(Flight), FlightsCollectionName},
-            {typeof(City), CitiesCollectionName},
-            {typeof(Country), CountriesCollectionName}
+            { typeof(Airport), AirportsCollectionName },
+            { typeof(Airline), AirlinesCollectionName },
+            { typeof(Flight), FlightsCollectionName },
+            { typeof(City), CitiesCollectionName },
+            { typeof(Country), CountriesCollectionName }
         };
 
         private IAirportsContextMongoDb dbContext;
 
-        public AirportsDataMongoDb()
-            : this(new AirportsContextMongoDb())
+        public AirportsDataMongoDb() : this(new AirportsContextMongoDb())
         {
         }
 
@@ -37,7 +36,7 @@
 
         public IQueryable<Airport> Airports
         {
-            get 
+            get
             {
                 return this.dbContext.GetCollection(AirportsCollectionName).AsQueryable<Airport>();
             }
@@ -45,7 +44,7 @@
 
         public IQueryable<Airline> Airlines
         {
-            get 
+            get
             {
                 return this.dbContext.GetCollection(AirlinesCollectionName).AsQueryable<Airline>();
             }
@@ -79,12 +78,12 @@
         {
             var type = typeof(T);
 
-            if(!collectionNames.ContainsKey(type))
+            if (!this.collectionNames.ContainsKey(type))
             {
                 throw new ArgumentException("There is no collection with items of this type in the database.");
             }
 
-            this.dbContext.SaveToCollection(collectionNames[type], item);
+            this.dbContext.SaveToCollection(this.collectionNames[type], item);
         }
     }
 }

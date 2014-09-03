@@ -2,15 +2,19 @@
 {
     using System;    
     using System.IO;
+    using System.Linq;
+    using System.Text.RegularExpressions;
     using Airports.Models.MySql;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public class JsonDataImporter
     {
-        public void ImportAirlineReports(string path)
+        private const string JsonFileExtensionPatter = @".json\b";
+
+        public void ImportAirlineReportsFromDirectory(string path)
         {
-            Console.WriteLine("Loading JSON reports into the MySql database");
-            string[] files = GetReportsFileNames(path);
+            var files = GetReportsFileNamesFromDirectory(path);
 
             using (AirportsDbContextMySql dbContext = new AirportsDbContextMySql())
             {
@@ -23,13 +27,13 @@
 
                 dbContext.SaveChanges();
             }
-
-            Console.WriteLine("Done!");
         }
 
-        private static string[] GetReportsFileNames(string path)
+        private static IEnumerable<string> GetReportsFileNamesFromDirectory(string directoryPath)
         {
-            string[] filePaths = Directory.GetFiles(path);
+            IEnumerable<string> filePaths = Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories)
+                            .Where(p => Regex.IsMatch(p, JsonFileExtensionPatter));
+
             return filePaths;
         }
     }
