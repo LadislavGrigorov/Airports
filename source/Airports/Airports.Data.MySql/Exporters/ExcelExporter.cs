@@ -3,9 +3,10 @@
     using System;
     using System.IO;
     using System.Linq;
+
+    using Airports.Data.SQLite;
     using Airports.Models.MySql;
     using SpreadsheetLight;
-    using Airports.Data.SQLite;
 
     public static class ExcelExporter
     {
@@ -20,24 +21,44 @@
 
             SLDocument excelFile = new SLDocument();
             using (AirportsDbContextSQLite sqliteDbContext = new AirportsDbContextSQLite())
-            {
+            {                
                 using (AirportsDbContextMySql mysqlDbContext = new AirportsDbContextMySql())
                 {
-                    var mysqlData = mysqlDbContext.Airlinereports.ToList();
-                    var sqliteData = sqliteDbContext.Airlines.ToList();
+                    var compositeReports = from report in mysqlDbContext.Airlinereports.AsEnumerable()
+                                        join airline in sqliteDbContext.Airlines.AsEnumerable()
+                                        on report.AirlineName equals airline.Name
+                                        select 
+                                        new {
+                                                report.AirlineName,
+                                                report.TotalFlightsCount,
+                                                report.AverageFlightsCount,
+                                                report.TotalFlightsDuration,
+                                                report.StartDate,
+                                                report.EndDate,
+                                                airline.Website,
+                                                airline.FoundationYear
+                                            };
 
-                    int rowCounter = 1;
-                    foreach (var row in mysqlData)
+                    excelFile.SetCellValue("A1", "Airline Name");
+                    excelFile.SetCellValue("B1", "Total Flights Count"); 
+                    excelFile.SetCellValue("C1", "Average Flights Duration");
+                    excelFile.SetCellValue("D1", "Total Flights Duration"); 
+                    excelFile.SetCellValue("E1", "From Date");
+                    excelFile.SetCellValue("F2", "To Date"); 
+                    excelFile.SetCellValue("G1", "Company Website");
+                    excelFile.SetCellValue("H1", "Foundation Year");
+
+                    int rowCounter = 2;
+                    foreach (var report in compositeReports)
                     {
-                        excelFile.SetCellValue("A" + rowCounter, row.AirlineId.ToString());
-                        excelFile.SetCellValue("B" + rowCounter, row.AirlineName);
-                        excelFile.SetCellValue("C" + rowCounter, row.TotalFlightsCount.ToString());
-                        excelFile.SetCellValue("D" + rowCounter, row.AverageFlightsCount.ToString());
-                        excelFile.SetCellValue("E" + rowCounter, row.TotalFlightsDuration.ToString());
-                        excelFile.SetCellValue("F" + rowCounter, row.StartDate.ToString());
-                        excelFile.SetCellValue("G" + rowCounter, row.EndDate.ToString());
-                        excelFile.SetCellValue("H" + rowCounter, sqliteData.Where(a => a.Name == row.AirlineName).First().Website);
-                        excelFile.SetCellValue("I" + rowCounter, sqliteData.Where(a => a.Name == row.AirlineName).First().FoundationYear);
+                        excelFile.SetCellValue("A" + rowCounter, report.AirlineName);
+                        excelFile.SetCellValue("B" + rowCounter, report.TotalFlightsCount.ToString());
+                        excelFile.SetCellValue("C" + rowCounter, report.AverageFlightsCount.ToString());
+                        excelFile.SetCellValue("D" + rowCounter, report.TotalFlightsDuration.ToString());
+                        excelFile.SetCellValue("E" + rowCounter, report.StartDate.ToString());
+                        excelFile.SetCellValue("F" + rowCounter, report.EndDate.ToString());
+                        excelFile.SetCellValue("G" + rowCounter, report.Website.ToString());
+                        excelFile.SetCellValue("H" + rowCounter, report.FoundationYear.ToString());
                         rowCounter++;
                     }
                 }
