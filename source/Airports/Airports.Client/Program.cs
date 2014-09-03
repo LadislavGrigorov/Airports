@@ -18,6 +18,7 @@
         private const string ExcelReportsDestinationPath = @"..\..\..\..\exports\Excel-Reports\";
         private const string PdfReportsFolderPath = @"..\..\..\..\exports\PDF-Reports\";
         private const string PdfReportsFileName = @"flight-report.pdf";
+        private const string XmlReportsFolderPath = @"..\..\..\..\Exports\Xml-Reports\";
 
         static void Main()
         {
@@ -78,7 +79,7 @@
         private static void GenerateXmlFlightsReport(IAirportsDataSqlServer airportsData)
         {
             Console.WriteLine("Exporting XML airlines report...");
-            XmlFileExporter.GenerateAirlinesReport(airportsData);
+            XmlFileExporter.GenerateAirlinesReport(XmlReportsFolderPath, airportsData);
             Console.WriteLine("XML airlines report done!");
         }
 
