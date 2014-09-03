@@ -19,6 +19,18 @@
                .Include("Airline")
                .ToList();
 
+            var aggregatedAirlineReports = context.Airlines.GetAll()
+                .Include("Flights")
+                .Select(a =>
+                    new
+                    {
+                        a.Name,
+                        TotalFlightsCount = a.Flights.Count,
+                        AverageFlightDuration = a.Flights.Average(f => f.DurationHours),
+                        TotalFlightDuration = a.Flights.Sum(f => f.DurationHours)
+                    })
+                .ToList();
+
             foreach (var flight in allFlights)
             {
                 string json = JsonConvert.SerializeObject(flight, Formatting.Indented);

@@ -42,6 +42,19 @@
                .Include("Airline")
                .ToList();
 
+            var aggregatedAirlineReports = airportsData.Airlines.GetAll()
+                .Include("Flights")
+                .Select(a => 
+                    new 
+                    { 
+                        a.Name,
+                        TotalFlightsCount = a.Flights.Count,
+                        AverageFlightDuration = a.Flights.Average(f => f.DurationHours),
+                        TotalFlightDuration = a.Flights.Sum(f => f.DurationHours)
+                    })
+                .ToList();
+
+
             foreach (var flight in flights)
             {
                 table.AddCell(flight.FlightId.ToString());

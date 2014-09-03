@@ -27,7 +27,7 @@
             /*Task 1:
              * a) Extract *.xls and *.xlsx files from a zip archive; read and load the data into SQL Server.
              * b) Import data from MongoDb to SQL Server. */
-            ExtractZipAndImportDataFromExcelAndMongoDb(airportsData, mongoData);
+            //ExtractZipAndImportDataFromExcelAndMongoDb(airportsData, mongoData);
             
             //Task 2: Generate PDF Reports
             GeneratePdfFlightsReport(airportsData);
