@@ -43,7 +43,10 @@
                     new XElement("arival-airport", flight.ArrivalAirport.Name),
                     new XElement("duration", flight.DurationHours + " hours"))))));
 
-            string fileName = string.Format(@"{0}airlines{1}.xml", filePath, DateTime.Now.ToBinary());
+            DateTime now = DateTime.Now;
+            string uniqueComponent = string.Format("{0}.{1}.{2}-{3}.{4}.{5}-{6}", 
+                now.Day, now.Month, now.Year, now.Hour, now.Minute, now.Second, now.Millisecond);
+            string fileName = string.Format(@"{0}airlines-{1}.xml", filePath, uniqueComponent);
             xdoc.Save(fileName);
         }
     }
