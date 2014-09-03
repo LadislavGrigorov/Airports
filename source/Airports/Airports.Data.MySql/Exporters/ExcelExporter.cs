@@ -5,9 +5,23 @@
     using System.Linq;
     using Airports.Models.MySql;
     using SpreadsheetLight;
+    using Airports.Data.SQLite;
 
     public static class ExcelExporter
     {
+        public static void Test()
+        {
+            AirportsDbContextSQLite sqliteDbContext = new AirportsDbContextSQLite();
+            using (sqliteDbContext)
+            {
+                var all = sqliteDbContext.Airlines;
+
+                foreach (var item in all)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
+        }
         //GenerateCompositeReport
         public static void GenerateExcelFile(string path)
         {

@@ -5,7 +5,8 @@
 
     public class AirportsDbContextSQLite : DbContext
     {
-        public AirportsDbContextSQLite() : base("")
+        public AirportsDbContextSQLite()
+            : base("AirportsSQLiteConnectionString")
         {
         }
 
