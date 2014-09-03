@@ -4,38 +4,52 @@
     using System.IO;
     using System.Linq;
     using System.Data.Entity;
+using System;
 
-    public static class JsonFileExporter
+    public class JsonFileExporter
     {
         private const string Extension = ".json";
+        private DateTime DefaultStartDate = DateTime.MinValue;
+        private DateTime DefaultEndDate = DateTime.MaxValue;
         
-        public static void GenerateReports(IAirportsDataSqlServer context, string reportsFolderPath)
+        public void GenerateReports(
+            IAirportsDataSqlServer context, 
+            string reportsFolderPath, 
+            DateTime? startDate = null,
+            DateTime? endDate = null)
         {
+            startDate = startDate ?? DefaultStartDate;
+            endDate = endDate ?? DefaultEndDate;
+
             CreateDirectoryIfNotExists(reportsFolderPath);
 
-            var allFlights = context.Flights.GetAll()
-               .Include("DepartureAirport")
-               .Include("ArrivalAirport")
-               .Include("Airline")
-               .ToList();
-
             var aggregatedAirlineReports = context.Airlines.GetAll()
-                .Include("Flights")
+                .Include(a => a.Flights)
                 .Select(a =>
                     new
                     {
+                        a.AirlineId,
                         a.Name,
-                        TotalFlightsCount = a.Flights.Count,
-                        AverageFlightDuration = a.Flights.Average(f => f.DurationHours),
-                        TotalFlightDuration = a.Flights.Sum(f => f.DurationHours)
+                        Flights = a.Flights.Where(f => startDate < f.FlightDate && f.FlightDate < endDate)
+                    })
+                .Select(a =>
+                    new
+                    {
+                        a.AirlineId,
+                        a.Name,
+                        FlightsCount = a.Flights.Count(),
+                        TotalDuration = a.Flights.Sum(f => f.DurationHours),
+                        AverageDuration = a.Flights.Average(f => f.DurationHours),
+                        StartDate = startDate,
+                        EndDate = endDate
                     })
                 .ToList();
 
-            foreach (var flight in allFlights)
+            foreach (var flight in aggregatedAirlineReports)
             {
                 string json = JsonConvert.SerializeObject(flight, Formatting.Indented);
 
-                using (var writer = new StreamWriter(reportsFolderPath + flight.FlightId + Extension))
+                using (var writer = new StreamWriter(reportsFolderPath + flight.AirlineId + Extension))
                 {
                     writer.Write(json);
                 }
