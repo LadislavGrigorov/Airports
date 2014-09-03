@@ -1,21 +1,18 @@
 ﻿namespace Airports.SqlServer.Data.Exporters
 {
+    using System.Data.Entity;
     using System.IO;
     using System.Linq;
-    using System.Data.Entity;
     using Airports.Data.SqlServer;
     using iTextSharp.text;
     using iTextSharp.text.pdf;
 
     public class PdfFileExporter
     {
-        private const string FlightIdColumnHeader = "Flight";
-        private const string DepartureAirportColumnHeader = "Departure Airport";
-        private const string ArrivalAirportColumnHeader = "Arrival Airport";
-        private const string FlightCodeColumnHeader = "Code";
-        private const string FlightDateColumnHeader = "Date";
-        private const string FlightDurationColumnHeader = "Duration";
-        private const string FlightAirlineColumnHeader = "Airline";
+        private const string FlightIdColumnHeader = "Airport";
+        private const string DepartureAirportColumnHeader = "Total Flights";
+        private const string ArrivalAirportColumnHeader = "Average Flight Duration";
+        private const string FlightCodeColumnHeader = "Total Flight Duration";
 
         public void GenerateFlightReport(string filePath, string fileName, IAirportsDataSqlServer airportsData)
         {
@@ -36,17 +33,11 @@
 
         private void FillTableData(PdfPTable table, IAirportsDataSqlServer airportsData)
         {
-            var flights = airportsData.Flights.GetAll()
-               .Include("DepartureAirport")
-               .Include("ArrivalAirport")
-               .Include("Airline")
-               .ToList();
-
             var aggregatedAirlineReports = airportsData.Airlines.GetAll()
                 .Include("Flights")
-                .Select(a => 
-                    new 
-                    { 
+                .Select(a =>
+                    new
+                    {
                         a.Name,
                         TotalFlightsCount = a.Flights.Count,
                         AverageFlightDuration = a.Flights.Average(f => f.DurationHours),
@@ -54,16 +45,12 @@
                     })
                 .ToList();
 
-
-            foreach (var flight in flights)
+            foreach (var airlineReport in aggregatedAirlineReports)
             {
-                table.AddCell(flight.FlightId.ToString());
-                table.AddCell(flight.DepartureAirport.Name + " (" + flight.DepartureAirport.AirportCode + ")");
-                table.AddCell(flight.ArrivalAirport.Name + " (" + flight.ArrivalAirport.AirportCode + ")");
-                table.AddCell(flight.FlightCode.ToString());
-                table.AddCell(flight.FlightDate.ToString("yyyy-MM-dd hh:mm:ss"));
-                table.AddCell(flight.DurationHours.ToString() + " hours");
-                table.AddCell(flight.Airline.Name);
+                table.AddCell(airlineReport.Name);
+                table.AddCell(airlineReport.TotalFlightsCount.ToString());
+                table.AddCell(airlineReport.AverageFlightDuration.ToString() + " hours");
+                table.AddCell(airlineReport.TotalFlightDuration.ToString());
             }
         }
 
@@ -73,15 +60,12 @@
             table.AddCell(DepartureAirportColumnHeader);
             table.AddCell(ArrivalAirportColumnHeader);
             table.AddCell(FlightCodeColumnHeader);
-            table.AddCell(FlightDateColumnHeader);
-            table.AddCell(FlightDurationColumnHeader);
-            table.AddCell(FlightAirlineColumnHeader);
         }
 
         private void AddTableHeader(PdfPTable table)
         {
-            PdfPCell cell = new PdfPCell(new Phrase("Flights"));
-            cell.Colspan = 7;
+            PdfPCell cell = new PdfPCell(new Phrase("Airline Reports"));
+            cell.Colspan = 4;
             cell.HorizontalAlignment = 1;
             cell.BackgroundColor = BaseColor.GRAY;
             table.AddCell(cell);
@@ -89,10 +73,10 @@
 
         private PdfPTable CreateTable()
         {
-            PdfPTable table = new PdfPTable(7);
+            PdfPTable table = new PdfPTable(4);
             table.WidthPercentage = 100;
             table.LockedWidth = false;
-            float[] widths = new float[] { 2f, 3f, 3f, 3f, 3f, 2f, 2f };
+            float[] widths = new float[] { 3f, 3f, 3f, 3f };
             table.SetWidths(widths);
             table.HorizontalAlignment = 0;
             table.SpacingBefore = 20f;
