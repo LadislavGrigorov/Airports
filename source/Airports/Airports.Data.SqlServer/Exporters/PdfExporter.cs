@@ -10,10 +10,11 @@
 
     public class PdfFileExporter
     {
-        private const string FlightIdColumnHeader = "Airline";
-        private const string DepartureAirportColumnHeader = "Total Flights";
-        private const string ArrivalAirportColumnHeader = "Average Flight Duration";
-        private const string FlightCodeColumnHeader = "Total Flight Duration";
+        private const string AirlineNameColumnHeader = "Airline";
+        private const string TotalFlightsColumnHeader = "Total Flights";
+        private const string AverageFlightDurationColumnHeader = "Average Flight Duration";
+        private const string TotalFlightDurationColumnHeader = "Total Flight Duration";
+        private const int PdfTableSize = 4;
 
         public void GenerateAggregatedAirlineReports(string filePath, string fileName, IAirportsDataSqlServer airportsData)
         {
@@ -63,16 +64,16 @@
 
         private void AddAirlineReportsTableColumns(PdfPTable table)
         {
-            table.AddCell(FlightIdColumnHeader);
-            table.AddCell(DepartureAirportColumnHeader);
-            table.AddCell(ArrivalAirportColumnHeader);
-            table.AddCell(FlightCodeColumnHeader);
+            table.AddCell(AirlineNameColumnHeader);
+            table.AddCell(TotalFlightsColumnHeader);
+            table.AddCell(AverageFlightDurationColumnHeader);
+            table.AddCell(TotalFlightDurationColumnHeader);
         }
 
         private void AddAirlineReportsTableHeader(PdfPTable table)
         {
             PdfPCell cell = new PdfPCell(new Phrase("Airline Reports"));
-            cell.Colspan = 4;
+            cell.Colspan = PdfTableSize;
             cell.HorizontalAlignment = 1;
             cell.BackgroundColor = BaseColor.GRAY;
             table.AddCell(cell);
@@ -80,7 +81,7 @@
 
         private PdfPTable CreateAirlineReportsTable()
         {
-            PdfPTable table = new PdfPTable(4);
+            PdfPTable table = new PdfPTable(PdfTableSize);
             table.WidthPercentage = 100;
             table.LockedWidth = false;
             float[] widths = new float[] { 3f, 3f, 3f, 3f };
